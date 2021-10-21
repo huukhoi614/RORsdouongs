@@ -1,0 +1,2 @@
+class Loaisp < ApplicationRecord
+end

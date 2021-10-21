@@ -1,0 +1,2 @@
+class Cuahang < ApplicationRecord
+end

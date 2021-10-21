@@ -1,0 +1,2 @@
+class Chonthem < ApplicationRecord
+end
