@@ -42,6 +42,14 @@
                   <li><a href="#">Tài Khoản</a></li>
                   <li><a href="#">Ưa thích</a></li>
                   <li><a href="#">Thanh toán</a></li>
+                  <%if session[:user_id] != nil%>
+                    <li><%= link_to "Đăng xuất", '/logout', :method => :delete%></li>
+                    <li><a href="#" id="account-info"></a></li>
+                  <%else%>
+                    <li><a href="/login">Đăng nhập</a></li>
+                  <%end%>
+                  
+                  
                 </ul>
               </div>
               <!-- end of header top menu -->
@@ -60,7 +68,7 @@
             <div class="col-md-3 col-sm-12 col-xs-12 text-lg-left text-md-center text-sm-center">
             <!-- logo -->
             <div class="logo mt-15 mb-15">
-              <a href="index.html">
+              <a href="/home">
                 <img src="/images/tocotoco.png" class="img-fluid" alt="" width="150" height="150">
               </a>
             </div>
@@ -149,7 +157,7 @@
                       <li>
                         <ul>
                           <li><a href="#">Tài khoản của tôi</a></li>
-                          <li><a href="#">Đăng kí tài khoản</a></li>
+                          <li><a href="/users/new">Đăng kí tài khoản</a></li>
                           <li><a href="#">FAQ</a></li>
                         </ul>
                       </li>
@@ -166,7 +174,7 @@
             </div>
             <!-- end of navigation section -->
           </div>
-          <div class="col-12">
+          
             <!-- Mobile Menu -->
             <div class="mobile-menu d-block d-lg-none"></div>
           </div>
@@ -424,6 +432,18 @@
 
       <!--=======  End of copyright section  =======-->
     </footer>
+    <script>
+            $(document).ready(function() {
+            $(".tabs-menu a").click(function(event) {
+                event.preventDefault();
+                $(this).parent().addClass("current");
+                $(this).parent().siblings().removeClass("current");
+                var tab = $(this).attr("href");
+                $(".tab-content").not(tab).css("display", "none");
+                $(tab).fadeIn();
+            });
+        });
 
+        </script>
   </body>
 </html>

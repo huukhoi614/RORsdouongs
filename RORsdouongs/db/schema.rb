@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_19_090300) do
+ActiveRecord::Schema.define(version: 2021_10_21_104025) do
 
   create_table "banggia", force: :cascade do |t|
     t.integer "gia"
@@ -124,6 +124,17 @@ ActiveRecord::Schema.define(version: 2021_10_19_090300) do
     t.integer "version"
     t.binary "definition"
     t.index ["principal_id", "name"], name: "UK_principal_name", unique: true
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "hashed_password"
+    t.string "salt"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "phone"
+    t.integer "point"
+    t.index ["phone"], name: "index_users_on_phone"
   end
 
   create_table "vanchuyens", force: :cascade do |t|

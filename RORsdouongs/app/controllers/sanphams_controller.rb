@@ -5,6 +5,8 @@ class SanphamsController < ApplicationController
   	@loaisp = Loaisp.all()
   end
 
+  def showtheosize
+  end
   def show
   	tam = 0
   	sanpham = Sanpham.find(params[:id])

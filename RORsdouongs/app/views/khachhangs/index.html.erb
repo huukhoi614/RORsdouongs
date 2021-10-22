@@ -1,0 +1,128 @@
+<div class="breadcrumb-area mb-50">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="breadcrumb-container">
+                        <ul>
+                            <li><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
+                            <li class="active">Tài khoản</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% @khachhangx = Khachhang.where(sodienthoai:  session[:phone_user])%>
+    <% @user = User.find(session[:user_id])%>
+    <!--=====  End of breadcrumb area  ======-->
+
+    <!--=============================================
+    =            My account page section         =
+    =============================================-->
+
+    <div class="my-account-section section position-relative mb-50 fix">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+
+                    <div class="row" id="tabs-container">
+
+                        <!-- My Account Tab Menu Start -->
+                        <div class="col-lg-3 col-12">
+                           
+                            <div class="myaccount-tab-menu  tabs-menu">
+                                <a href="#dashboad" class="active" ><i class="fa fa-dashboard"></i>
+                                   Bảng tin</a>
+
+                                <a href="#orders"><i class="fa fa-cart-arrow-down"></i> Giỏ hàng</a>
+
+                                <a href="#download"><i class="fa fa-user"></i> Chi tiết tài khoản</a>
+
+                                <a href="#payment-method" ><i class="fa fa-credit-card"></i> Hình thức thanh toán</a>
+                                
+                            </div>
+                        
+                        </div>
+                        <!-- My Account Tab Menu End -->
+
+                        <!-- My Account Tab Content Start -->
+                        <div class="col-lg-9 col-12">
+                            <div class="tab" id="myaccountContent">
+                                <!-- Single Tab Content Start -->
+                                <div class="tab-content" id="dashboad" >
+                                    <div class="myaccount-content">
+                                        <h3>Dashboard</h3>
+
+                                        <div class="welcome">
+                                            <p>Hello, <strong><%= @user.name%></strong></p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- Single Tab Content End -->
+
+                                <!-- Single Tab Content Start -->
+                                <div class="tab-content" id="orders" >
+                                    <div class="myaccount-content">
+                                        <h3>Giỏ hàng</h3>
+
+                                        <div class="myaccount-table table-responsive text-center">
+                                            <table class="table table-bordered">
+                                                
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Single Tab Content End -->
+
+                                <!-- Single Tab Content Start -->
+                                <div class="tab-content" id="download" >
+                                    <div class="myaccount-content">
+                                        <h3>Thông tin tài khoản</h3>
+
+                                       <div class="account-details-form">
+                                             <% @khachhangx.each do |khach| %>
+                                                <div class="row">
+                                                   
+                                                    <address>
+                                                          
+                                                        <p><strong><%= khach.tenKH%></strong></p>
+                                                        <p>Điểm: <%= @user.point%> điểm</p>
+                                                        <p>Địa chỉ: <%= khach.diachi%></p>
+                                                        <p>Mobile: <%= @user.phone%></p> 
+                                                       
+                                                    </address>
+                                                </div>
+                                                <div class=row>
+                                                    <% if @khachhangx == nil%>
+                                                        <%= link_to 'Thêm thông tin', new_khachhang_path %><i class="fa fa-edit"></i>
+                                                    <%else%>
+                                                        <%= link_to 'Sửa thông tin', edit_khachhang_path(khach) %> <i class="fa fa-edit"></i>
+
+                                                    <%end%>
+                                                   
+                                                </div>
+                                             <% end %>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Single Tab Content End -->
+
+                                <!-- Single Tab Content Start -->
+                                <div class="tab-content" id="payment-method">
+                                    <div class="myaccount-content">
+                                        <h3>Hình thức thanh toán</h3>
+
+                                        <p class="saved-message">Bạn chưa lưu Phương thức thanh toán của mình.</p>
+                                    </div>
+                                </div>
+                           
+                            </div>
+                        </div>
+                        <!-- My Account Tab Content End -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>

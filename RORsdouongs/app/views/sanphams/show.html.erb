@@ -1,4 +1,11 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"><p id="notice"><%= notice %></p></div>
+        <div class="col-md-4"></div>
+        
+    </div>
+</div>
 <div class="breadcrumb-area mb-50">
     <div class="container">
         <div class="row">
@@ -69,23 +76,28 @@
                                     <div class="row">
                                         <div class="col-md-6 col-12 mb-25">
                                             <h3>Chọn Size</h3>
-                                            
-                                            <select class="nice-select" name="size[id]" id="size_id">
-                                                <% @sizes.each do |size| %>
-                                                    <% @ctsanphams.each do |ctsanpham| %>
-                                                        <% if size.id == ctsanpham.size_id%>
-                                                            <option value="<%= size.id %>"><%= size.tensize %></option>
-                                                            <%break%>
+                                             
+                                                <select class="nice-select" name="size[id]" id="size_id">
+                                                    <% @sizes.each do |size| %>
+                                                        <% @ctsanphams.each do |ctsanpham| %>
+
+                                                            <% if size.id == ctsanpham.size_id%>
+                                                                <option value="<%= size.id %>"><%= size.tensize %></option>
+                                                                <%break%>
+                                                            <% end %>
                                                         <% end %>
                                                     <% end %>
-                                                <% end %>
-                                            </select>
+                                                </select>
+                                               <input type="hidden" name="sanphamid" value="<%= @sanpham.id%>">
+
+                                              
+                                            
 
                                         </div>
                                         <div class="col-md-6 col-12 mb-25">
                                            
-                                            <script>
-                                                $(function(){
+                                            <script type="text/javascript">
+                                                $(function savesize(){
                                                     $('.nice-select').trigger('change'); //This event will fire the change event. 
                                                     $('.nice-select').change(function(){
                                                       var data= $(this).val();
