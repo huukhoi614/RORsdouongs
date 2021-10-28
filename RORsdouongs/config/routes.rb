@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :ct_sp_ches
+  resources :dathangs
+  get 'ctchonthems/index'
+  get 'ctchonthems/edit'
+  get 'ctchonthems/show'
+  get 'ctchonthems/new'
   get 'taikhoan/giaodien'
   get 'home/trangchu'
   get 'sessions/new'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_21_104025) do
+ActiveRecord::Schema.define(version: 2021_10_27_081223) do
 
   create_table "banggia", force: :cascade do |t|
     t.integer "gia"
@@ -29,19 +29,21 @@ ActiveRecord::Schema.define(version: 2021_10_21_104025) do
   end
 
   create_table "ct_sp_ches", force: :cascade do |t|
-    t.bigint "ctchonthem_id", null: false
-    t.bigint "cuahang_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["ctchonthem_id"], name: "index_ct_sp_ches_on_ctchonthem_id"
-    t.index ["cuahang_id"], name: "index_ct_sp_ches_on_cuahang_id"
+    t.bigint "ctspham_id", null: false
+    t.bigint "dathang_id", null: false
+    t.integer "soluong"
+    t.integer "giact"
+    t.index ["ctspham_id"], name: "index_ct_sp_ches_on_ctspham_id"
+    t.index ["dathang_id"], name: "index_ct_sp_ches_on_dathang_id"
   end
 
   create_table "ctchonthems", force: :cascade do |t|
-    t.bigint "ctspham_id", null: false
     t.bigint "chonthem_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "ctspham_id", null: false
     t.index ["chonthem_id"], name: "index_ctchonthems_on_chonthem_id"
     t.index ["ctspham_id"], name: "index_ctchonthems_on_ctspham_id"
   end
@@ -72,6 +74,26 @@ ActiveRecord::Schema.define(version: 2021_10_21_104025) do
     t.string "sodienthoai"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "dathangs", force: :cascade do |t|
+    t.date "ngaydat"
+    t.date "ngayduyet"
+    t.date "ngaygiao"
+    t.date "ngaynhan"
+    t.string "hinhthucmua"
+    t.integer "phiship"
+    t.integer "tonggia"
+    t.bigint "order_status_id", null: false
+    t.bigint "vanchuyen_id", null: false
+    t.bigint "khachhang_id", null: false
+    t.bigint "cuahang_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cuahang_id"], name: "index_dathangs_on_cuahang_id"
+    t.index ["khachhang_id"], name: "index_dathangs_on_khachhang_id"
+    t.index ["order_status_id"], name: "index_dathangs_on_order_status_id"
+    t.index ["vanchuyen_id"], name: "index_dathangs_on_vanchuyen_id"
   end
 
   create_table "khachhangs", force: :cascade do |t|
@@ -145,13 +167,17 @@ ActiveRecord::Schema.define(version: 2021_10_21_104025) do
   end
 
   add_foreign_key "banggia", "ctsphams"
-  add_foreign_key "ct_sp_ches", "ctchonthems"
-  add_foreign_key "ct_sp_ches", "cuahangs"
+  add_foreign_key "ct_sp_ches", "ctsphams"
+  add_foreign_key "ct_sp_ches", "dathangs"
   add_foreign_key "ctchonthems", "chonthems"
   add_foreign_key "ctchonthems", "ctsphams"
   add_foreign_key "ctkhuyenmais", "ct_sp_ches"
   add_foreign_key "ctkhuyenmais", "khuyenmais"
   add_foreign_key "ctsphams", "sanphams"
   add_foreign_key "ctsphams", "sizes"
+  add_foreign_key "dathangs", "cuahangs"
+  add_foreign_key "dathangs", "khachhangs"
+  add_foreign_key "dathangs", "order_statuses"
+  add_foreign_key "dathangs", "vanchuyens"
   add_foreign_key "sanphams", "loaisps"
 end

@@ -122,7 +122,7 @@ Banggium.create! id: 35, gia: 52000, ngaycapnhat: "19/10/2020", ctspham_id: 35
 Banggium.create! id: 36, gia: 60000, ngaycapnhat: "19/10/2020", ctspham_id: 36
 
 Chonthem.delete_all
-Chonthem.create! id: 1, tenthanhphan: "Trân châu sương mai", gia: 8000
+Chonthem.create! id: 1, tenthanhphan: "Không", gia: 0
 Chonthem.create! id: 2, tenthanhphan: "Hạt dẻ", gia: 8000
 Chonthem.create! id: 3, tenthanhphan: "Trân châu Baby", gia: 8000
 Chonthem.create! id: 4, tenthanhphan: "Cream cake", gia: 8000

@@ -1,0 +1,2 @@
+module CtSpChesHelper
+end

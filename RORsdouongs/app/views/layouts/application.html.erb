@@ -13,7 +13,7 @@
 
   </head>
 
-  <body>
+  <body class=" ">
     <header>
     <!--=======  header top  =======-->
 
@@ -39,10 +39,11 @@
               <!-- header top menu -->
               <div class="header-top-menu">
                 <ul>
-                  <li><a href="#">Tài Khoản</a></li>
+                  
                   <li><a href="#">Ưa thích</a></li>
                   <li><a href="#">Thanh toán</a></li>
                   <%if session[:user_id] != nil%>
+                    <li><a href="/khachhangs">Tài Khoản</a></li>
                     <li><%= link_to "Đăng xuất", '/logout', :method => :delete%></li>
                     <li><a href="#" id="account-info"></a></li>
                   <%else%>
@@ -156,7 +157,7 @@
                       </li>
                       <li>
                         <ul>
-                          <li><a href="#">Tài khoản của tôi</a></li>
+                          <li><a href="/khachhangs">Tài khoản của tôi</a></li>
                           <li><a href="/users/new">Đăng kí tài khoản</a></li>
                           <li><a href="#">FAQ</a></li>
                         </ul>
@@ -185,7 +186,10 @@
       <!--=======  End of header bottom  =======-->
     </header>
     <div class="header-top pt-10 pb-10 pt-lg-10 pb-lg-10 pt-md-10 pb-md-10">
-      <%= yield %>
+      <div >
+         <%= yield %>
+      </div>
+     
     </div>
     
     

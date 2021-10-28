@@ -1,0 +1,38 @@
+
+<%= form_with(model: ct_sp_ch) do |form| %>
+  <% if ct_sp_ch.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(ct_sp_ch.errors.count, "error") %> prohibited this ct from being saved:</h2>
+
+      <ul>
+        <% ct_sp_ch.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :ctspham_id %>
+    <%= form.text_field :ctspham_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :dathang_id %>
+    <%= form.text_field :dathang_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :soluong %>
+    <%= form.text_field :soluong %>
+  </div>
+
+  <div class="field">
+    <%= form.label :giact %>
+    <%= form.text_field :giact %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

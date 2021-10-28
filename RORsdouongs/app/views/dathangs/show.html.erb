@@ -1,0 +1,192 @@
+<!--<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Ngaydat:</strong>
+  <%= @dathang.ngaydat %>
+</p>
+
+<p>
+  <strong>Ngayduyet:</strong>
+  <%= @dathang.ngayduyet %>
+</p>
+
+<p>
+  <strong>Ngaygiao:</strong>
+  <%= @dathang.ngaygiao %>
+</p>
+
+<p>
+  <strong>Ngaynhan:</strong>
+  <%= @dathang.ngaynhan %>
+</p>
+
+<p>
+  <strong>Hinhthucmua:</strong>
+  <%= @dathang.hinhthucmua %>
+</p>
+
+<p>
+  <strong>Phiship:</strong>
+  <%= @dathang.phiship %>
+</p>
+
+<p>
+  <strong>Tonggia:</strong>
+  <%= @dathang.tonggia %>
+</p>
+
+<p>
+  <strong>Order status:</strong>
+  <%= @dathang.order_status_id %>
+</p>
+
+<p>
+  <strong>Vanchuyen:</strong>
+  <%= @dathang.vanchuyen_id %>
+</p>
+
+<p>
+  <strong>Khachhang:</strong>
+  <%= @dathang.khachhang_id %>
+</p>
+
+<p>
+  <strong>Cuahang:</strong>
+  <%= @dathang.cuahang_id %>
+</p>
+
+<%= link_to 'Edit', edit_dathang_path(@dathang) %> |
+<%= link_to 'Back', dathangs_path %>-->
+<div class="breadcrumb-area mb-50">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="breadcrumb-container">
+            <ul>
+              <li><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
+              <li class="active"><a>Đặt hàng</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--=====  End of breadcrumb area  ======-->
+
+
+  <!--=============================================
+    =            Cart page content         =
+    =============================================-->
+
+
+<div class="page-section section mb-50">
+  <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <form action="#">
+            <!--=======  cart table  =======-->
+
+            <div class="cart-table table-responsive mb-40">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th class="pro-thumbnail">Ảnh</th>
+                    <th class="pro-title">Đồ uống</th>
+                    <th class="pro-size">Size</th>
+                    <th class="pro-price">Giá</th>
+                    <th class="pro-quantity">Số lượng</th>
+                    <th class="pro-subtotal">Tổng</th>
+                    <th class="pro-remove"> </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @dathang.ct_sp_ches.each do |a| %>
+                      <tr>
+                          <% @banggium = Banggium.where(:ctspham_id => a.ctspham.id).last%>
+                          <td class="pro-thumbnail"><a href="#"><img src="/images/thucuong/<%= a.ctspham.sanpham.anh%>"
+                            class="img-fluid" width="50" height="70" alt="<%= a.ctspham.sanpham.tensanpham %>" ></a></td>
+                          <td class="pro-title"><a href="#"><%= a.ctspham.sanpham.tensanpham %></a></td>
+                          <td class="pro-title"><a href="#"><%= a.ctspham.size.tensize %></a></td>
+                          <td class="pro-price">
+                            <% Banggium.where(:id => @banggium.id).each do |bangium| %>
+                              <span><%= bangium.gia %></span>
+                            <% end %>
+                            </td>
+                          <td class="pro-quantity">
+                            <div class="pro-qty"><input type="number" value="<%= a.soluong%>"></div>
+                          </td>
+                          <td class="pro-subtotal"><span><%= a.giact %></span></td>
+                          <td class="pro-remove"><%= link_to 'Destroy', ct_sp_ch_url(a.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                          
+                      </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+
+            <!--=======  End of cart table  =======-->
+
+
+          </form>
+
+          <div class="row">
+
+            <div class="col-lg-6 col-12">
+              <!--=======  Calculate Shipping  =======-->
+
+              <div class="calculate-shipping">
+                <h4>Chọn điểm dến khác</h4>
+                <form action="#">
+                  <div class="row">
+                    
+                    <div class="col-md-6 col-12 mb-25">
+                      <input type="text" name="diachinhan" placeholder="Địa chỉ nhận">
+                    </div>
+                    <div class="col-md-6 col-12 mb-25">
+                      
+                    </div>
+                    <div class="col-md-6 col-12 mb-25">
+                      <select class="nice-select">
+                        <% @cuahang.each do |cuahang| %>
+                          <option value="<%= cuahang.id %>" ><%= cuahang.tencuahang %>
+                                </option>
+                      <% end %> </select>
+                    </div>
+                    <div class="col-md-6 col-12 mb-25">
+                      <input type="submit" value="Thay đổi">
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+
+            <div class="col-lg-6 col-12 d-flex">
+              <!--=======  Cart summery  =======-->
+
+              <div class="cart-summary">
+                <div class="cart-summary-wrap">
+                  <h4>Thông tin đơn hàng</h4>
+                  <p>Địa chỉ nhận:<span name="diachinhan"><%= @dathang.khachhang.diachi%></span></p>
+                  <p>Địa chỉ cửa hàng: <span name="diachicuahang"></span></p>
+                  <p>Giá: <span name="giadonhang"><%= @dathang.tonggia%></span></p>
+                  <p>Phí ship: <span name="phiship">0</span></p>
+                  <h2>Tổng cộng <span name="tongcong"><%= @dathang.tonggia%></span></h2>
+                </div>
+                <div class="cart-summary-button">
+                  <button class="checkout-btn">Mua hàng</button>
+                  <button class="update-btn">Cập nhật giỏ hàng</button>
+                </div>
+              </div>
+
+              <!--=======  End of Cart summery  =======-->
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>

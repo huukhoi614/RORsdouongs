@@ -7,11 +7,7 @@ import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
-import "modernizr-2.8.3.min"
-import "jquery.min"
-import "popper.min"
-import "plugins"
-import "main"
+
 
 Rails.start()
 Turbolinks.start()

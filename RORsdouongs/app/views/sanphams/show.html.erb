@@ -21,29 +21,38 @@
         </div>
     </div>
 </div>
-
+<%= form_for(:ct_sp_ch, url: ct_sp_ches_path) do |form|%>
 <div class="single-product-content ">
     <div class="container">
         <!--=======  single product content container  =======-->
         <div class="single-product-content-container mb-35">
             <div class="row">
                 <div class="col-lg-6 col-md-12 col-xs-12">  <!-- product image gallery -->
-                    <div class="product-image-slider d-flex flex-custom-xs-wrap flex-sm-nowrap align-items-center mb-sm-35">
-                        <div class="tab-content product-large-image-list">
-                            <div class="tab-pane fade show active" id="single-slide1" role="tabpanel"
-                                aria-labelledby="single-slide-tab-1">
+                    <div class="tab-pane fade show active" id="single-slide1" role="tabpanel" aria-labelledby="single-slide-tab-1">
                                 <!--Single Product Image Start-->
-                                <div class="single-product-img easyzoom img-full">
-                                    <img src="/images/thucuong/<%= @sanpham.anh %>" class="img-fluid"
-                                        alt="">
-                                </div>
-                                <!--Single Product Image End-->
-                            </div>
-                            
+                        <div class="single-product-img easyzoom img-full">
+                            <img src="/images/thucuong/<%= @sanpham.anh %>" class="img-fluid"
+                                alt="">
                         </div>
-                        <!--Modal Content End-->
-
+                        <!--Single Product Image End-->
                     </div>
+                    <div class="sidebar-area">
+                        <div class="sidebar mb-35">
+                            <h3 class="sidebar-title">THÀNH PHẦN THÊM:</h3>
+                            <ul class="product-categories">
+                                <% @chonthems.each do |chonthem| %>
+                                    
+                                    <li class="container">
+                                        <div class="row"> 
+                                            <div class="col-md-8"><h4><%= check_box("chonthem", chonthem.id)%> <%= chonthem.tenthanhphan %> </h4></div>
+                                            <div class="col-md-4"> <h4 class="text-right"> +<%= chonthem.gia %>đ</h4></div>
+                                        </div>
+                                    </li>
+                                   
+                                <% end %>
+                            </ul>
+                        </div>
+                     </div>
                     <!-- end of product image gallery -->
                 </div>
                     <div class="col-lg-6 col-md-12 col-xs-12">
@@ -60,75 +69,75 @@
 
                                 <a href="#">(1 customer review)</a>
                             </p>
-
-                            <h2 class="product-price mb-15">
+                            
+                            <h2 class="product-price mb-15" >
                                 <!--<span class="main-price">$12.90</span>-->
 
                                 <% @bangiums.each do |bangium| %>
-                                    <span class="discounted-price"> <%= bangium.gia %> đ</span>
-                                <% end %>
+                                    <input type="text" name="dongia" id="dongia" value="<%= bangium.gia %>"><% end %>
+                                    <span class="discounted-price" id="giahiengio"> 
+                                        
+                                    </span>đ
+                                
 
                             </h2>
 
                             <p class="product-description mb-20"><%= @sanpham.mota%></p>
                             <div class="calculate-shipping">
-                                 <form action="show">
+                                
                                     <div class="row">
                                         <div class="col-md-6 col-12 mb-25">
                                             <h3>Chọn Size</h3>
                                              
                                                 <select class="nice-select" name="size[id]" id="size_id">
+                                                     <option value="0" hidden="true">Vui lòng chọn size</option>
                                                     <% @sizes.each do |size| %>
                                                         <% @ctsanphams.each do |ctsanpham| %>
-
-                                                            <% if size.id == ctsanpham.size_id%>
-                                                                <option value="<%= size.id %>"><%= size.tensize %></option>
+                                                            <% if size.id == ctsanpham.size_id%>   <option value="<%= ctsanpham.id %>" ><%= size.tensize %>
+                                                                </option>
+                                                                 
                                                                 <%break%>
                                                             <% end %>
                                                         <% end %>
                                                     <% end %>
                                                 </select>
-                                               <input type="hidden" name="sanphamid" value="<%= @sanpham.id%>">
+                                              
 
                                               
                                             
 
                                         </div>
                                         <div class="col-md-6 col-12 mb-25">
-                                           
-                                            <script type="text/javascript">
-                                                $(function savesize(){
-                                                    $('.nice-select').trigger('change'); //This event will fire the change event. 
-                                                    $('.nice-select').change(function(){
-                                                      var data= $(this).val();
 
-                                                      alert(data);
-                                                    });
-                                                });
-                                            </script>
+                                            <%= form.text_field :ctspham_id, name: "ctspham_id", id: "ctspham_id"%>
+                                        
+                                            <input type="hidden" name="tonggia" id="tonggia">
+                                            
                                             
                                         </div>
+                                        
+                                        
+                                        
                                     </div>
-                                </form>
+                                
                              </div>
 
 
                             <div class="cart-buttons mb-20">
                                 <div class="pro-qty mr-20 mb-xs-20">
-                                    <input type="text" value="1">
+                                    <input type="number" class="loadtong" id="alice" name="soluong" min="1" max="10" value="1">
                                 </div>
-                                <div class="add-to-cart-btn">
-                                    <a href="#"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</a>
-                                </div>
+                                <button class="add-to-cart-btn" type="submit">
+                                    <i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng
+                                </button>
                             </div>
 
                             <div class="single-product-action-btn mb-20">
                                 <a href="#" data-tooltip="Add to wishlist"> <span class="icon_heart_alt"></span> Thêm vào ưa thích</a>
                             </div>
-
+                        
                             <h2 class="product-price mb-15">
-                                <!--<span class="main-price">$12.90</span>-->
-                                <span class="discounted-price">Tổng: 42000 đ</span>
+                                Tổng: <span class="discounted-price" id="mirror"></span>đ
                             </h2>
                             <div class="single-product-category mb-20">
                                 <h3>Loại <span><a href="#">...</a></span></h3>
@@ -151,25 +160,39 @@
         </div>
     </div>
 </div>
+<% end -%>
 <div class="single-product-tab-section mb-35">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">   
-                 <div class="sidebar-area">
-                    <div class="sidebar mb-35">
-                        <h3 class="sidebar-title">THÀNH PHẦN THÊM:</h3>
-                        <ul class="product-categories">
-                            <% @chonthems.each do |chonthem| %>
-                                <li class="container">
-                                    <div class="row"> 
-                                        <div class="col-md-8"><h4><%= check_box("chonthem", chonthem.id)%> <%= chonthem.tenthanhphan %> </h4></div>
-                                        <div class="col-md-4"> <h4 class="text-right"> +<%= chonthem.gia %>đ</h4></div>
-                                    </div></li>
-                            <% end %>
-                        </ul>
-                    </div>
-                 </div>
-            </div>
-        </div>
-    </div>
+    
 </div>
+<script type="text/javascript">
+    $(function savesize(){
+        $('.nice-select').trigger('change'); //This event will fire the change event. 
+        $('.nice-select').change(function(){
+          var data= $(this).val();
+          document.getElementById("ctspham_id").value=data;
+        });
+    });
+</script>
+<script type="text/javascript">
+    jQuery(function($) {
+      $('#mirror').text($('#alice').val()* $('#dongia').val() );
+
+      $('#alice').on('input', function() {
+        $('#mirror').text($('#alice').val()* $('#dongia').val());
+      });
+    });         
+</script>
+<script type="text/javascript">
+    jQuery(function($) {
+      $('#tonggia').val($('#alice').val()* $('#dongia').val() );
+
+      $('#alice').on('input', function() {
+        $('#tonggia').val($('#alice').val()* $('#dongia').val());
+      });
+    });         
+</script>
+<script type="text/javascript">
+    jQuery(function($) {
+      $('#giahiengio').text($('#dongia').val() );
+    });
+</script>
