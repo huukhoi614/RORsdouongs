@@ -40,11 +40,19 @@
                         <div class="sidebar mb-35">
                             <h3 class="sidebar-title">THÀNH PHẦN THÊM:</h3>
                             <ul class="product-categories">
+                                <%counter = 1%>
                                 <% @chonthems.each do |chonthem| %>
                                     
                                     <li class="container">
-                                        <div class="row"> 
-                                            <div class="col-md-8"><h4><%= check_box("chonthem", chonthem.id)%> <%= chonthem.tenthanhphan %> </h4></div>
+                                        <div class="row">
+
+                                            <div class="col-md-8">
+                                                <% chonthemcb = "subchecked[#{counter.to_s}]"%>
+                                                <h4><%= check_box_tag(chonthemcb, chonthem.id)%>
+                                                    <%= label_tag(chonthemcb, chonthem.tenthanhphan) %>
+                                                </h4>
+                                                <% counter = counter + 1%>
+                                            </div>
                                             <div class="col-md-4"> <h4 class="text-right"> +<%= chonthem.gia %>đ</h4></div>
                                         </div>
                                     </li>
@@ -74,7 +82,7 @@
                                 <!--<span class="main-price">$12.90</span>-->
 
                                 <% @bangiums.each do |bangium| %>
-                                    <input type="text" name="dongia" id="dongia" value="<%= bangium.gia %>"><% end %>
+                                    <input type="hidden" name="dongia" id="dongia" value="<%= bangium.gia %>"><% end %>
                                     <span class="discounted-price" id="giahiengio"> 
                                         
                                     </span>đ
@@ -109,7 +117,7 @@
                                         </div>
                                         <div class="col-md-6 col-12 mb-25">
 
-                                            <%= form.text_field :ctspham_id, name: "ctspham_id", id: "ctspham_id"%>
+                                            <%= form.hidden_field :ctspham_id, name: "ctspham_id", id: "ctspham_id"%>
                                         
                                             <input type="hidden" name="tonggia" id="tonggia">
                                             

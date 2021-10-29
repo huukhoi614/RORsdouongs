@@ -21,16 +21,31 @@ class CtSpChesController < ApplicationController
   	else
 	  	khachhang = Khachhang.checkphone(session[:phone_user]) 
 	   @dathang = current_dathang(khachhang.id)
+
 	    
 	    ctspham = Ctspham.find_by_id(params[:ctspham_id])
 	    idbanggium = Banggium.find_by_ctspham_id(params[:ctspham_id])
 	    banggiumx = Banggium.find(idbanggium.id)
 	    soluong = params[:soluong]
-	    tonggia = banggiumx.gia.to_i * soluong.to_i
+      sem = params[:subchecked]
 
+	    tonggia = banggiumx.gia.to_i * soluong.to_i
+      @chonthems = Chonthem.all
+      
 	    @ct_sp_ch = @dathang.ct_sp_ches.build(:ctspham => ctspham,:giact => tonggia,:soluong => soluong)
+      
+     
 	    respond_to do |format|    
 	        if @ct_sp_ch.save
+            if(sem != nil)
+              sem.each do |sem|
+                counter = 1
+                 while sem[counter] != nil
+                  @chonthemxx = create_ctchonmua(sem[counter],@ct_sp_ch.id)  
+                  counter = counter + 1
+                 end
+              end
+            end
 	          format.html { redirect_to(@ct_sp_ch.dathang, :notice => 'Line item was successfully created') }
 	          format.json { render :show, status: :created, location: @line_item }
 	        else
@@ -56,6 +71,10 @@ class CtSpChesController < ApplicationController
 
   # DELETE /line_items/1 or /line_items/1.json
   def destroy
+    @chonthems = Ctchonthem.where(:ct_sp_ch_id => @ct_sp_ch.id)
+    if(@chonthems!= nil)
+      destroy_ctchonthem(@ct_sp_ch.id)
+    end
     @ct_sp_ch.destroy
     respond_to do |format|
       format.html { redirect_to dathang_url(@ct_sp_ch.dathang_id), notice: "Line item was successfully destroyed." }

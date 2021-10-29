@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_27_081223) do
+ActiveRecord::Schema.define(version: 2021_10_29_031325) do
 
   create_table "banggia", force: :cascade do |t|
     t.integer "gia"
@@ -43,9 +43,9 @@ ActiveRecord::Schema.define(version: 2021_10_27_081223) do
     t.bigint "chonthem_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "ctspham_id", null: false
+    t.bigint "ct_sp_ch_id", null: false
     t.index ["chonthem_id"], name: "index_ctchonthems_on_chonthem_id"
-    t.index ["ctspham_id"], name: "index_ctchonthems_on_ctspham_id"
+    t.index ["ct_sp_ch_id"], name: "index_ctchonthems_on_ct_sp_ch_id"
   end
 
   create_table "ctkhuyenmais", force: :cascade do |t|
@@ -170,7 +170,7 @@ ActiveRecord::Schema.define(version: 2021_10_27_081223) do
   add_foreign_key "ct_sp_ches", "ctsphams"
   add_foreign_key "ct_sp_ches", "dathangs"
   add_foreign_key "ctchonthems", "chonthems"
-  add_foreign_key "ctchonthems", "ctsphams"
+  add_foreign_key "ctchonthems", "ct_sp_ches"
   add_foreign_key "ctkhuyenmais", "ct_sp_ches"
   add_foreign_key "ctkhuyenmais", "khuyenmais"
   add_foreign_key "ctsphams", "sanphams"

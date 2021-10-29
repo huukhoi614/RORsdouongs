@@ -54,6 +54,6 @@ class CtchonthemsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def khachhang_params
-      params.require(:ctchonthem).permit(:chonthem_id, :ctspham_id)
+      params.require(:ctchonthem).permit(:chonthem_id, :ct_sp_ch_id)
     end
 end

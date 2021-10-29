@@ -7,4 +7,13 @@ private
         session[:dathang_id] = dathang.id
         dathang
     end
+    def create_ctchonmua(chonmuaid, ctspchid)
+    	Ctchonthem.find(session[:khong])
+    rescue ActiveRecord::RecordNotFound
+    	ctchonthem =Ctchonthem.create! chonthem_id: chonmuaid, ct_sp_ch_id: ctspchid
+    	ctchonthem
+    end
+    def destroy_ctchonthem(ctspchid)
+    	Ctchonthem.where(ct_sp_ch_id: ctspchid).delete_all
+    end
 end
