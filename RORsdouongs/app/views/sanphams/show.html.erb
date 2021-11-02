@@ -101,7 +101,9 @@
                                                      <option value="0" hidden="true">Vui lòng chọn size</option>
                                                     <% @sizes.each do |size| %>
                                                         <% @ctsanphams.each do |ctsanpham| %>
-                                                            <% if size.id == ctsanpham.size_id%>   <option value="<%= ctsanpham.id %>" ><%= size.tensize %>
+                                                            <% if size.id == ctsanpham.size_id%>
+                                                               <option value="<%= ctsanpham.id %>" >
+                                                                   <%= label_tag size.tensize, nil, class: 'loadgiadi' %>                     
                                                                 </option>
                                                                  
                                                                 <%break%>
@@ -177,6 +179,7 @@
         $('.nice-select').trigger('change'); //This event will fire the change event. 
         $('.nice-select').change(function(){
           var data= $(this).val();
+          
           document.getElementById("ctspham_id").value=data;
         });
     });

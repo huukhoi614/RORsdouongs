@@ -98,18 +98,20 @@
               <!-- end of search bar -->
               <!-- shopping cart -->
               <div class="shopping-cart" id="shopping-cart">
-                <a href="cart.html">
+                <% if session[:dathang_id] != nil%>
+                  <a href="/dathangs/<%= session[:dathang_id]%>">
                   <div class="cart-icon d-inline-block">
                     <span class="icon_bag_alt"></span>
                   </div>
                   <div class="cart-info d-inline-block">
                     <p>Giỏ hàng
                       <span>
-                        0 items - 0đ
+                        <% dathang = Dathang.find(session[:dathang_id])%>
+                        <%= dathang.ct_sp_ches.count%> ly - <%= dathang.tonggia%>đ
                       </span>
                     </p>
                   </div>
-                </a>
+                </a><%end%>
                 <!-- end of shopping cart -->
 
                 <!-- cart floating box -->

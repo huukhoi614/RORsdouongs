@@ -30,7 +30,18 @@ class CtSpChesController < ApplicationController
       sem = params[:subchecked]
 
 	    tonggia = banggiumx.gia.to_i * soluong.to_i
-      @chonthems = Chonthem.all
+      tongtopping = 0
+      if(sem != nil)
+        sem.each do |sem|
+          counter = 1
+           while sem[counter] != nil
+            chonthemf = Chonthem.find(sem[counter])
+            tongtopping = tongtopping.to_i + chonthemf.gia.to_i
+            counter = counter + 1
+           end
+        end
+      end
+      tonggia = tonggia + tongtopping
       
 	    @ct_sp_ch = @dathang.ct_sp_ches.build(:ctspham => ctspham,:giact => tonggia,:soluong => soluong)
       

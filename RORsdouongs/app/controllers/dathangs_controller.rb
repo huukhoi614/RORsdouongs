@@ -37,14 +37,35 @@ class DathangsController < ApplicationController
 
   # PATCH/PUT /dathangs/1 or /dathangs/1.json
   def update
+    khachhang = Khachhang.checkphone(session[:phone_user]) 
+    @dathang = current_dathang(khachhang.id)
+    cuhang = params[:cuahang_id]
+    diachinhan = params[:diachinhan]
+    order_status_id = params[:order_status_id]
+    if diachinhan == nil
+      diachinhan = khachhang.diachi
+    end
+    
     respond_to do |format|
-      if @dathang.update(dathang_params)
-        format.html { redirect_to @dathang, notice: "Dathang was successfully updated." }
-        format.json { render :show, status: :ok, location: @dathang }
+      if order_status_id == nil
+        if @dathang.update(cuahang_id: cuhang, diachinhan: diachinhan)
+          format.html { redirect_to @dathang, notice: "Dathang was successfully updated." }
+          format.json { render :show, status: :ok, location: @dathang }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @dathang.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @dathang.errors, status: :unprocessable_entity }
+        if @dathang.update(order_status_id: order_status_id)
+          session[:dathang_id] = nil
+          format.html { redirect_to sanphams_url, notice: "Dathang was successfully updated." }
+          format.json { render :show, status: :ok, location: @dathang }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @dathang.errors, status: :unprocessable_entity }
+        end
       end
+    
     end
   end
 
@@ -65,6 +86,6 @@ class DathangsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def dathang_params
-      params.require(:dathang).permit(:ngaydat, :ngayduyet, :ngaygiao, :ngaynhan, :hinhthucmua, :phiship, :tonggia, :order_status_id, :vanchuyen_id, :khachhang_id, :cuahang_id)
+      params.require(:dathang).permit(:ngaydat, :ngayduyet, :ngaygiao, :ngaynhan, :hinhthucmua, :phiship, :tonggia, :order_status_id, :vanchuyen_id, :khachhang_id, :cuahang_id, :diachinhan)
     end
 end

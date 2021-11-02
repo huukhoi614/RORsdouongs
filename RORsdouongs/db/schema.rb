@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_29_031325) do
+ActiveRecord::Schema.define(version: 2021_10_30_004340) do
 
   create_table "banggia", force: :cascade do |t|
     t.integer "gia"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 2021_10_29_031325) do
     t.bigint "cuahang_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "diachinhan"
     t.index ["cuahang_id"], name: "index_dathangs_on_cuahang_id"
     t.index ["khachhang_id"], name: "index_dathangs_on_khachhang_id"
     t.index ["order_status_id"], name: "index_dathangs_on_order_status_id"
