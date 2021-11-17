@@ -1,0 +1,72 @@
+<%= form_with(model: dathang) do |form| %>
+  <% if dathang.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(dathang.errors.count, "error") %> prohibited this dathang from being saved:</h2>
+
+      <ul>
+        <% dathang.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :ngaydat %>
+    <%= form.date_select :ngaydat %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ngayduyet %>
+    <%= form.date_select :ngayduyet %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ngaygiao %>
+    <%= form.date_select :ngaygiao %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ngaynhan %>
+    <%= form.date_select :ngaynhan %>
+  </div>
+
+  <div class="field">
+    <%= form.label :hinhthucmua %>
+    <%= form.text_field :hinhthucmua %>
+  </div>
+
+  <div class="field">
+    <%= form.label :phiship %>
+    <%= form.number_field :phiship %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tonggia %>
+    <%= form.number_field :tonggia %>
+  </div>
+
+  <div class="field">
+    <%= form.label :order_status_id %>
+    <%= form.text_field :order_status_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :vanchuyen_id %>
+    <%= form.text_field :vanchuyen_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :khachhang_id %>
+    <%= form.text_field :khachhang_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cuahang_id %>
+    <%= form.text_field :cuahang_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
