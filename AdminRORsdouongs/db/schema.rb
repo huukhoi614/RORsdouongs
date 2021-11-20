@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2021_11_20_011652) do
 
-  create_table "active_admin_comments", force: :cascade do |t|
+  create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
     t.string "resource_type"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_011652) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource"
   end
 
-  create_table "admin_users", force: :cascade do |t|
+  create_table "admin_users", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_011652) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
-  create_table "banggia", force: :cascade do |t|
+  create_table "banggia", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "gia"
     t.date "ngaycapnhat"
     t.bigint "ctspham_id", null: false
@@ -47,14 +47,14 @@ ActiveRecord::Schema.define(version: 2021_11_20_011652) do
     t.index ["ctspham_id"], name: "index_banggia_on_ctspham_id"
   end
 
-  create_table "chonthems", force: :cascade do |t|
+  create_table "chonthems", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "tenthanhphan"
     t.integer "gia"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "ct_sp_ches", force: :cascade do |t|
+  create_table "ct_sp_ches", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "ctspham_id", null: false
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_011652) do
     t.index ["dathang_id"], name: "index_ct_sp_ches_on_dathang_id"
   end
 
-  create_table "ctchonthems", force: :cascade do |t|
+  create_table "ctchonthems", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "chonthem_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_011652) do
     t.index ["ct_sp_ch_id"], name: "index_ctchonthems_on_ct_sp_ch_id"
   end
 
-  create_table "ctkhuyenmais", force: :cascade do |t|
+  create_table "ctkhuyenmais", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.float "tylegiam"
     t.bigint "khuyenmai_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_011652) do
     t.index ["sanpham_id"], name: "index_ctkhuyenmais_on_sanpham_id"
   end
 
-  create_table "ctsphams", force: :cascade do |t|
+  create_table "ctsphams", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "sanpham_id", null: false
     t.bigint "size_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_011652) do
     t.index ["size_id"], name: "index_ctsphams_on_size_id"
   end
 
-  create_table "cuahangs", force: :cascade do |t|
+  create_table "cuahangs", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "tencuahang"
     t.string "diachi"
     t.string "sodienthoai"
@@ -103,7 +103,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_011652) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "dathangs", force: :cascade do |t|
+  create_table "dathangs", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.date "ngaydat"
     t.date "ngayduyet"
     t.date "ngaygiao"
@@ -125,15 +125,16 @@ ActiveRecord::Schema.define(version: 2021_11_20_011652) do
     t.index ["vanchuyen_id"], name: "index_dathangs_on_vanchuyen_id"
   end
 
-  create_table "khachhangs", force: :cascade do |t|
+  create_table "khachhangs", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "tenKH"
     t.string "diachi"
     t.string "sodienthoai"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["sodienthoai"], name: "index_khachhangs_on_sodienthoai", unique: true
   end
 
-  create_table "khuyenmais", force: :cascade do |t|
+  create_table "khuyenmais", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "tendot"
     t.date "ngayBD"
     t.date "ngayKT"
@@ -141,25 +142,25 @@ ActiveRecord::Schema.define(version: 2021_11_20_011652) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "loaisps", force: :cascade do |t|
+  create_table "loaisps", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "tenloai"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "nguyenlieus", force: :cascade do |t|
+  create_table "nguyenlieus", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "tenNL"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "order_statuses", force: :cascade do |t|
+  create_table "order_statuses", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "tenStt"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "sanphams", force: :cascade do |t|
+  create_table "sanphams", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "tensanpham"
     t.bigint "loaisp_id", null: false
     t.text "mota"
@@ -169,21 +170,13 @@ ActiveRecord::Schema.define(version: 2021_11_20_011652) do
     t.index ["loaisp_id"], name: "index_sanphams_on_loaisp_id"
   end
 
-  create_table "sizes", force: :cascade do |t|
+  create_table "sizes", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "tensize"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "sysdiagrams", primary_key: "diagram_id", id: :integer, force: :cascade do |t|
-    t.string "name", null: false
-    t.integer "principal_id", null: false
-    t.integer "version"
-    t.binary "definition"
-    t.index ["principal_id", "name"], name: "UK_principal_name", unique: true
-  end
-
-  create_table "thanhphan_nguyenlieus", force: :cascade do |t|
+  create_table "thanhphan_nguyenlieus", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "nguyenlieu_id", null: false
     t.bigint "sanpham_id", null: false
     t.string "donvitinh"
@@ -194,7 +187,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_011652) do
     t.index ["sanpham_id"], name: "index_thanhphan_nguyenlieus_on_sanpham_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name"
     t.string "hashed_password"
     t.string "salt"
@@ -205,7 +198,7 @@ ActiveRecord::Schema.define(version: 2021_11_20_011652) do
     t.index ["phone"], name: "index_users_on_phone"
   end
 
-  create_table "vanchuyens", force: :cascade do |t|
+  create_table "vanchuyens", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "khoangcach"
     t.integer "dongia"
     t.datetime "created_at", precision: 6, null: false
