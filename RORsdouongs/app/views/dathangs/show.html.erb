@@ -96,6 +96,7 @@
                     <th class="pro-title">Thành phần thêm</th>
                     <th class="pro-size">Size</th>
                     <th class="pro-price">Giá</th>
+                    <th >Giá T phần thêm</th>
                     <th class="pro-quantity">Số lượng</th>
                     <th class="pro-subtotal">Tổng</th>
                     <th class="pro-remove"> </th>
@@ -121,6 +122,13 @@
                               <span><%= bangium.gia %></span>
                             <% end %>
                             </td>
+                            <td> <p>
+                              <%tongct=0%>
+                            <% @chonthems.each do |ct|%>
+                              <%tongct = tongct+ ct.chonthem.gia.to_i%>
+                            <%end%>
+                              <%= tongct%>
+                            </p></td>
                           <td class="pro-quantity">
                             <div class="pro-qty"><input type="number" value="<%= a.soluong%>"></div>
                           </td>

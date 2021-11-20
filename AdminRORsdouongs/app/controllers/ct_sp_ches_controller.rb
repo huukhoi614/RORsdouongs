@@ -19,7 +19,7 @@ class CtSpChesController < ApplicationController
   	if(session[:phone_user] == nil)
   		redirect_to login_url
   	else
-	  	khachhang = Khachhang.checkphone(session[:phone_user]) 
+	  	khachhang = Khachhang.find(1)
 	   @dathang = current_dathang(khachhang.id)
 
 	    

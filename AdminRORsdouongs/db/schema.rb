@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_13_011557) do
+ActiveRecord::Schema.define(version: 2021_11_20_011652) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -80,9 +80,9 @@ ActiveRecord::Schema.define(version: 2021_11_13_011557) do
     t.bigint "khuyenmai_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "loaisp_id", null: false
+    t.bigint "sanpham_id", null: false
     t.index ["khuyenmai_id"], name: "index_ctkhuyenmais_on_khuyenmai_id"
-    t.index ["loaisp_id"], name: "index_ctkhuyenmais_on_loaisp_id"
+    t.index ["sanpham_id"], name: "index_ctkhuyenmais_on_sanpham_id"
   end
 
   create_table "ctsphams", force: :cascade do |t|
@@ -218,7 +218,7 @@ ActiveRecord::Schema.define(version: 2021_11_13_011557) do
   add_foreign_key "ctchonthems", "chonthems"
   add_foreign_key "ctchonthems", "ct_sp_ches"
   add_foreign_key "ctkhuyenmais", "khuyenmais"
-  add_foreign_key "ctkhuyenmais", "loaisps"
+  add_foreign_key "ctkhuyenmais", "sanphams"
   add_foreign_key "ctsphams", "sanphams"
   add_foreign_key "ctsphams", "sizes"
   add_foreign_key "dathangs", "cuahangs"

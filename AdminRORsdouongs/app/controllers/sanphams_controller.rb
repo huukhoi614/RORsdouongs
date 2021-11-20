@@ -1,8 +1,7 @@
 class SanphamsController < ApplicationController
 	before_action :set_sanpham, only: %i[ show edit update destroy ]
   def index
-    
-  	@sanphams = Sanpham.all()
+  	@sanphams = Sanpham.search(params[:term], params[:termloai]).page(params[:page]).per(8)
   	@loaisp = Loaisp.all()
   end
 
@@ -30,6 +29,6 @@ private
 
 	# Only allow a list of trusted parameters through.
 	def sanpham_params
-	  params.require(:sanpham).permit(:tensanpham, :mota, :anh, :loaisp_id)
+	  params.require(:sanpham).permit(:term, :termloai)
 	end
 end

@@ -25,7 +25,7 @@ private
         end
     end
     def checksukien(loaisp_id)
-        @ctkhuyenmais = Ctkhuyenmai.where(loaisp_id: loaisp_id)
+        @ctkhuyenmais = Ctkhuyenmai.where(sanpham_id: loaisp_id)
         giamgia = 0.0
         @ctkhuyenmais.each do |ctkhuyenmai|
             khuyenmai = Khuyenmai.find(ctkhuyenmai.khuyenmai_id)
