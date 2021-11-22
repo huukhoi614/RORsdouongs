@@ -9,5 +9,9 @@ class Sanpham < ApplicationRecord
 		end
 	end
 	
+	def filtered_ctspham
+		self.ctsphams.map {|ctspham| {id: ctspham.id, sanpham_id: ctspham.sanpham_id, size_id: ctspham.size_id}}
+	end
+
 
 end
