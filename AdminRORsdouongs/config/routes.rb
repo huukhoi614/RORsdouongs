@@ -25,10 +25,14 @@ Rails.application.routes.draw do
     end
   namespace :api do
     namespace :v1 do
-       resources :loaisps
-       resources :sanphams
-       resources :cuahangs
-
+      resources :loaisps
+      resources :sanphams
+      resources :ctsphams
+      resources :cuahangs
+      resources :sizes
+      resources :chonthems
+      resources :bangiums
+      resources :khachhangs
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
