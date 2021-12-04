@@ -4,7 +4,9 @@ class Dathang < ApplicationRecord
   belongs_to :khachhang
   belongs_to :cuahang
   has_many :ct_sp_ches, :dependent => :destroy
-  def tonggia 
-        ct_sp_ches.to_a.sum { |item| item.giact}
+  def tonggiat
+  	ct_sp_ches.to_a.sum { |item| item.giact}
+  	
   end
+  
 end

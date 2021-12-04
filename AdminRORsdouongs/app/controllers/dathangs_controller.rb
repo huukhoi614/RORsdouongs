@@ -43,7 +43,7 @@ class DathangsController < ApplicationController
 
     respond_to do |format|
         if order_status_id.to_i < 5
-          if @dathang.update(order_status_id: order_status_id, ngaydat: DateTime.now)
+          if @dathang.update(order_status_id: order_status_id, ngaydat: DateTime.now, tonggia: @dathang.tonggiat)
             session[:dathang_id] = nil
             format.html { redirect_to dathangs_url, notice: "Dathang was successfully updated." }
             format.json { render :show, status: :ok, location: @dathang }

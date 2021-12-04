@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :khuyenmais
+
+  resources :dasboard
+  get 'thongke/index'
+  get 'thongke/theongay'
+  get 'thongke/theothang'
   resources :ct_sp_ches
   resources :dathangs
   get 'ctchonthems/index'
@@ -13,7 +19,7 @@ Rails.application.routes.draw do
   resources :users
   resources :sanphams
   resources :khachhangs
-  root 'sanphams#index'
+  root 'dasboard#index'
   get 'sanpham/showtheosize'=> 'sanphams#showtheosize'
   
     get 'home' => 'home#trangchu'

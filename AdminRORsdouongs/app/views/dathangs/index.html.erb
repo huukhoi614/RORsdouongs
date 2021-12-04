@@ -1,19 +1,18 @@
 
-<div class="container-fluid"> 
- <div class="row"> 
-  <div class="col-md-12 col-md-offset-1"> 
-   <div class="panel panel-default panel-table"> 
-    <div class="panel-heading"> 
-     <div class="row"> 
-      
-      <div class="col col-md-12 text-left "> 
-       <div class="tabs">
-         <button class="tablinks active" data-electronic="allproducts">Tất cả</button>
-         <button class="tablinks" data-electronic="Microcontrollers">Hoàn thành</button>
-         <button class="tablinks" data-electronic="module">Chưa hoàn thành</button>
-      </div>
-
-      <!-- Tab content -->
+   <div class="main-header">
+  <div class="container-fluid">
+    <div class="tabs">
+                 <button class="tablinks active" data-electronic="allproducts">Tất cả</button>
+                 <button class="tablinks" data-electronic="Microcontrollers">Hoàn thành</button>
+                 <button class="tablinks" data-electronic="module">Chưa hoàn thành</button>
+              </div>
+  </div>
+            
+          
+</div>
+<div class="main-content">
+  <div class="box">
+    <div class="box-body overflow-scroll">
       <div class="wrapper_tabcontent">
          <div id="allproducts" class="tabcontent active">
            <div class="panel-body"> 
@@ -36,7 +35,7 @@
                 <td><a href="dathangs/<%= dathang.id%>"><%= dathang.id %></a></td>
                 <td><%= dathang.ngaydat %></td>
                 <td><%= dathang.ngaynhan %></td>
-                <td><%= dathang.tonggia %></td>
+                <td><%= dathang.tonggiat %></td>
                 <td><%= dathang.order_status.tenStt %></td>
                 <td><%= dathang.khachhang.tenKH %></td>      
              
@@ -69,10 +68,10 @@
                 <td><a href="dathangs/<%= dathang.id%>"><%= dathang.id %></a></td>
                 <td><%= dathang.ngaydat %></td>
                 <td><%= dathang.ngaynhan %></td>
-                <td><%= dathang.tonggia %></td>
+                <td><%= dathang.tonggiat %></td>
                 <td><%= dathang.order_status.tenStt %></td>
                 <td><%= dathang.khachhang.tenKH %></td>      
-            
+               
                  <td align="center"><a class="btn btn-default"><em class="fa fa-pencil"></em></a>
                  </td> 
               </tr> <%end%>
@@ -103,7 +102,7 @@
                 <td><a href="dathangs/<%= dathang.id%>"><%= dathang.id %></a></td>
                 <td><%= dathang.ngaydat %></td>
                 <td><%= dathang.ngaynhan %></td>
-                <td><%= dathang.tonggia %></td>
+                <td><%= dathang.tonggiat %></td>
                 <td><%= dathang.order_status.tenStt %></td>
                 <td><%= dathang.khachhang.tenKH %></td> 
                 <td>
@@ -135,39 +134,13 @@
           <% end %>
            </tbody></table> 
           </div>
+           
          </div>
       </div>
-      </div>
-      
-      
+    </div>
+  </div>
+</div>    
 
-      </div> <br/>
-      <div class="row text-right">
-        <div class="col-md-12 text-right">
-        <div id="dong_ho">
-         <div id="thoi_gian">
-             <div >
-                 <span id="gio"></span>
-             </div>
-
-         </div>
-     </div></div>
-      </div>
-      
-    </div> 
-    
-     
-    </div> 
-
-    <div class="panel-footer"> 
-     <div class="row"> 
-      
-       
-     </div> 
-    </div> 
-</div>
-</div>
-</div>
 <script type="text/javascript">
   var tabLinks = document.querySelectorAll(".tablinks");
 var tabContent =document.querySelectorAll(".tabcontent");
@@ -197,15 +170,5 @@ function openTabs(el) {
 }
 
 </script>
-<script>
-     function Dong_ho() {
-         var gio = document.getElementById("gio");
-       
-         var Gio_hien_tai = new Date();
-        
-         gio.innerHTML = Gio_hien_tai;
-         
-     }
-    var Dem_gio = setInterval(Dong_ho, 1000);
- </script>
+
 
