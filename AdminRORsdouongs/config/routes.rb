@@ -38,6 +38,7 @@ Rails.application.routes.draw do
       resources :sizes
       resources :chonthems
       resources :bangiums
+      get 'bangiums/gia_size' => 'bangiums#gia_size'
       resources :khachhangs
     end
   end

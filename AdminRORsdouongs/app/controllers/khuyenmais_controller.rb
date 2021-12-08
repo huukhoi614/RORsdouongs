@@ -12,6 +12,7 @@ class KhuyenmaisController < ApplicationController
 
   def edit
   end
+  
   def create
     respond_to do |format|
       if @khuyenmai.save
