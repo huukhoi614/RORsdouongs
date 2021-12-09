@@ -9,7 +9,7 @@ module Api::V1
 					join ctkhuyenmais on ctkhuyenmais.sanpham_id = sanphams.id
 					where ctsphams.size_id = 1
 				")
-			.select("sanphams.id,sanphams.tensanpham,sanphams.anh,sanphams.loaisp_id,banggia.gia, ctkhuyenmais.tylegiam")
+			.select("sanphams.id,sanphams.tensanpham,sanphams.anh,banggia.gia,ctkhuyenmais.tylegiam")
 		render json: @records 
 	  end
 
