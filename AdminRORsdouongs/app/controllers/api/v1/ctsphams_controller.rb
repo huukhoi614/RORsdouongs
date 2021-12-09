@@ -3,7 +3,7 @@ module Api::V1
   
 	  def index
 		@ctsphams = Ctspham.select(:id,:sanpham_id,:size_id)
-		render json: @ctsphams       
+		render json: @ctsphams
 	  end
 
 	  def show

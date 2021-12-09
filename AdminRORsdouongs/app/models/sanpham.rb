@@ -9,8 +9,8 @@ class Sanpham < ApplicationRecord
 		end
 	end
 
-	def ctspham_first
-		ctsphams.select(:id,:size_id).first
+	def id_ctspham
+		ctsphams.select(:id).first
 	end
 
 	def ctspham_all
