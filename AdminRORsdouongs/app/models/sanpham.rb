@@ -8,13 +8,17 @@ class Sanpham < ApplicationRecord
 		    all
 		end
 	end
-	
-	def filtered_ctspham
-		self.ctsphams.map {|ctspham| {id: ctspham.id, sanpham_id: ctspham.sanpham_id, size_id: ctspham.size_id}}
+
+	def ctspham_first
+		ctsphams.select(:id,:size_id).first
 	end
+
+	def ctspham_all
+		ctsphams.select(:id, :size_id)
+	end
+	
 	def soluongban
   		ctsphams.to_a.sum { |item| item.soluong}
-  	
   	end
 
 end
