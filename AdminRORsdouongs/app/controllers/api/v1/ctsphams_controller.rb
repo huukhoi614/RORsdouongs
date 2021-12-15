@@ -7,8 +7,7 @@ module Api::V1
 	  end
 
 	  def show
-		sanpham = Sanpham.find(params[:id])
-		@ctspham = Ctspham.joins(:banggia, :size).where(sanpham_id: sanpham.id).select(:id,:tensize,:gia)
+		@ctspham = Ctspham.select(:id,:sanpham_id,:size_id).find(params[:id])
 		render json: @ctspham
 	  end
 	end
