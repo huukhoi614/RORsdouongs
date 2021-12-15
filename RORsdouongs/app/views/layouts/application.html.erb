@@ -7,39 +7,25 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag "bootstrap.min" %>
+    <%= stylesheet_link_tag "elegent.min" %>
+    <%= stylesheet_link_tag "font-awesome.min" %>
+    <%= stylesheet_link_tag "helper" %>
+    <%= stylesheet_link_tag "plugins" %>
+    <%= stylesheet_link_tag "main" %>
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
 
   </head>
 
   <body >
     <header >
-    <!--=======  header top  =======-->
-
       <div class="header-top pt-10 pb-10 pt-lg-10 pb-lg-10 pt-md-10 pb-md-10">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center text-sm-left">
-              <!-- currncy language dropdown -->
-              <div class="lang-currency-dropdown">
-                <ul>
-                  <li> <a href="#">Việt Nam</a>
-                    <ul>
-                      <li><a href="#">English</a></li>
-                      <li><a href="#">French</a></li>
-                      <li><a href="#">Japanease</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-              <!-- end of currncy language dropdown -->
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12  text-center text-sm-right">
-              <!-- header top menu -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  text-center text-sm-right">
               <div class="header-top-menu">
-                <ul>
-                  
+                <ul>                  
                   <li><a href="#">Ưa thích</a></li>
                   <li><a href="#">Thanh toán</a></li>
                   <%if session[:user_id] != nil%>
@@ -49,19 +35,12 @@
                   <%else%>
                     <li><a href="/login">Đăng nhập</a></li>
                   <%end%>
-                  
-                  
                 </ul>
               </div>
-              <!-- end of header top menu -->
             </div>
           </div>
         </div>
       </div>
-
-      <!--=======  End of header top  =======-->
-
-      <!--=======  header bottom  =======-->
 
       <div class="header-bottom header-bottom-one header-sticky ">
         <div class="container-fluid">
@@ -73,7 +52,6 @@
                 <img src="/images/tocotoco.png" class="img-fluid" alt="" width="150" height="150">
               </a>
             </div>
-            <!-- end of logo -->
           </div>
           <div class="col-md-9 col-sm-12 col-xs-12">
             <div
@@ -87,65 +65,39 @@
                   Điện thoại: <span class="number">000-000-0000</span>
                 </div>
               </div>
-              <!-- end of header phone number -->
-              <!-- search bar -->
+
               <div class="header-advance-search">
                 <form action="#">
                   <input type="text" placeholder="Tìm kiếm thức uống">
                   <button><span class="icon_search"></button>
                 </form>
               </div>
-              <!-- end of search bar -->
-              <!-- shopping cart -->
+
               <div class="shopping-cart" id="shopping-cart">
                 <% if session[:dathang_id] != nil%>
-                  <a href="/dathangs/<%= session[:dathang_id]%>">
-                  <div class="cart-icon d-inline-block">
-                    <span class="icon_bag_alt"></span>
-                  </div>
-                  <div class="cart-info d-inline-block">
-                    <p>Giỏ hàng
-                      <span>
-                        <% dathang = Dathang.find(session[:dathang_id])%>
-                        <%= dathang.ct_sp_ches.count%> ly - <%= dathang.tonggia%>đ
-                      </span>
-                    </p>
-                  </div>
-                </a><%end%>
-                <!-- end of shopping cart -->
-
-                <!-- cart floating box -->
-                
-                <!-- end of cart floating box -->
+                    <a href="/dathangs/<%= session[:dathang_id]%>">
+                      <div class="cart-icon d-inline-block">
+                        <span class="icon_bag_alt"></span>
+                      </div>
+                    <div class="cart-info d-inline-block">
+                      <p>Giỏ hàng
+                        <span>
+                          <% dathang = Dathang.find(session[:dathang_id])%>
+                          <%= dathang.ct_sp_ches.count%> ly - <%= dathang.tonggia%>đ
+                        </span>
+                      </p>
+                    </div>
+                  </a>
+                <%end%>
               </div>
             </div>
 
-            <!-- navigation section -->
             <div class="main-menu">
               <nav>
                 <ul>
-                  <li><a href="#">HOME</a>
+                  <li><a href="/home">HOME</a>
                   </li>
-                  <li class="menu-item-has-children"><a href="/">Shop</a>
-                    <ul class="sub-menu">
-                      <li class="menu-item-has-children"><a href="#">Chính</a>
-                        <ul class="sub-menu">
-                          
-                        </ul>
-                      </li>
-                      <li class="menu-item-has-children"><a href="#">Sản Phẩm</a>
-                        <ul class="sub-menu">
-                          <li><a href="#">Danh sách sản phẩm</a></li>
-                          <li><a href="#">Sản phẩm theo mục</a></li>
-                          <li><a href="#">Sản phẩm theo loại</a></li>
-                        </ul>
-                      </li>
-                      <li class="menu-item-has-children"><a href="#">Đổi quà</a>
-                        <ul class="sub-menu">
-
-                        </ul>
-                      </li>
-                    </ul>
+                  <li><a href="/">Shop</a>
                   </li>
                   <li class="menu-item-has-children"><a href="#">Trang</a>
                     <ul class="mega-menu three-column">
@@ -166,43 +118,26 @@
                       </li>
                     </ul>
                   </li>
-                  <li class="menu-item-has-children"><a href="#">Bài viết</a>
-                    <ul class="sub-menu">
-                      
-                    </ul>
-                  </li>
                   <li><a href="#">Liên hệ</a></li>
                 </ul>
               </nav>
             </div>
-            <!-- end of navigation section -->
           </div>
-          
-            <!-- Mobile Menu -->
-            <div class="mobile-menu d-block d-lg-none"></div>
+          <div class="mobile-menu d-block d-lg-none"></div>
           </div>
           </div>
         </div>
       </div>
 
-      <!--=======  End of header bottom  =======-->
     </header>
-    <div class="header-top pt-10 pb-10 pt-lg-10 pb-lg-10 pt-md-10 pb-md-10" style="background-color: #DDDDDD">
-      <div >
-         <%= yield %>
-      </div>
-     
-    </div>
-    
-    
-    <footer>
-      <!--=======  newsletter section  =======-->
 
+    <%= yield %>
+
+    <footer>
       <div class="newsletter-section pt-50 pb-50">
         <div class="container">
           <div class="row">
             <div class="col-lg-4 col-md-12 col-sm-12 mb-sm-20 mb-xs-20">
-              <!--=======  newsletter title =======-->
 
               <div class="newsletter-title">
                 <h1>
@@ -211,11 +146,9 @@
                 </h1>
               </div>
 
-              <!--=======  End of newsletter title  =======-->
             </div>
 
             <div class="col-lg-8 col-md-12 col-sm-12">
-              <!--=======  subscription-form wrapper  =======-->
 
               <div class="subscription-form-wrapper d-flex flex-wrap flex-sm-nowrap">
                 <p class="mb-xs-20">Đăng ký nhận bản tin của chúng tôi</p>
@@ -224,31 +157,18 @@
                     <input type="email" id="mc-email" autocomplete="off" placeholder="Your email address">
                     <button id="mc-submit" type="submit"> subscribe!</button>
                   </form>
-
-                  <!-- mailchimp-alerts Start -->
-                  <div class="mailchimp-alerts">
-                    <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
-                    <div class="mailchimp-success"></div><!-- mailchimp-success end -->
-                    <div class="mailchimp-error"></div><!-- mailchimp-error end -->
-                  </div><!-- mailchimp-alerts end -->
                 </div>
               </div>
 
-              <!--=======  End of subscription-form wrapper  =======-->
             </div>
           </div>
         </div>
       </div>
 
-      <!--=======  End of newsletter section  =======-->
-
-      <!--=======  social contact section  =======-->
-
       <div class="social-contact-section pt-50 pb-50">
         <div class="container">
           <div class="row">
             <div class="col-lg-4 col-md-12 order-2 order-md-2 order-sm-2 order-lg-1">
-              <!--=======  social media links  =======-->
 
               <div class="social-media-section">
                 <h2>Theo dõi</h2>
@@ -265,19 +185,14 @@
                 </div>
               </div>
 
-              <!--=======  End of social media links  =======-->
 
             </div>
             <div class="col-lg-8 col-md-12 order-1 order-md-1 order-sm-1 order-lg-2  mb-sm-50 mb-xs-50">
-              <!--=======  contact summery  =======-->
 
               <div class="contact-summery">
                 <h2>Liên hệ</h2>
 
-                <!--=======  contact segments  =======-->
-
                 <div class="contact-segments d-flex justify-content-between flex-wrap flex-lg-nowrap">
-                  <!--=======  single contact  =======-->
 
                   <div class="single-contact d-flex mb-xs-20">
                     <div class="icon">
@@ -288,9 +203,6 @@
                     </div>
                   </div>
 
-                  <!--=======  End of single contact  =======-->
-                  <!--=======  single contact  =======-->
-
                   <div class="single-contact d-flex mb-xs-20">
                     <div class="icon">
                       <span class="icon_mobile"></span>
@@ -299,9 +211,6 @@
                       <p>Điện thoại: <span>000-000-0000</span></p>
                     </div>
                   </div>
-
-                  <!--=======  End of single contact  =======-->
-                  <!--=======  single contact  =======-->
 
                   <div class="single-contact d-flex">
                     <div class="icon">
@@ -312,31 +221,19 @@
                     </div>
                   </div>
 
-                  <!--=======  End of single contact  =======-->
                 </div>
 
-                <!--=======  End of contact segments  =======-->
-
-
-
               </div>
-
-              <!--=======  End of contact summery  =======-->
 
             </div>
           </div>
         </div>
       </div>
 
-      <!--=======  End of social contact section  =======-->
-
-      <!--=======  footer navigation  =======-->
-
       <div class="footer-navigation-section pt-40 pb-40">
         <div class="container">
           <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 mb-xs-30">
-              <!--=======  single navigation section  =======-->
 
               <div class="single-navigation-section">
                 <h3 class="nav-section-title">THÔNG TIN</h3>
@@ -348,10 +245,8 @@
                 </ul>
               </div>
 
-              <!--=======  End of single navigation section  =======-->
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 mb-xs-30">
-              <!--=======  single navigation section  =======-->
 
               <div class="single-navigation-section">
                 <h3 class="nav-section-title">TÀI KHOẢN</h3>
@@ -363,10 +258,8 @@
                 </ul>
               </div>
 
-              <!--=======  End of single navigation section  =======-->
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 mb-xs-30">
-              <!--=======  single navigation section  =======-->
 
               <div class="single-navigation-section">
                 <h3 class="nav-section-title">DỊCH VỤ</h3>
@@ -378,10 +271,8 @@
                 </ul>
               </div>
 
-              <!--=======  End of single navigation section  =======-->
             </div>
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-              <!--=======  single navigation section  =======-->
 
               <div class="single-navigation-section">
                 <h3 class="nav-section-title">BỔ SUNG</h3>
@@ -393,22 +284,15 @@
                 </ul>
               </div>
 
-              <!--=======  End of single navigation section  =======-->
             </div>
           </div>
         </div>
       </div>
 
-      <!--=======  End of footer navigation  =======-->
-
-
-      <!--=======  copyright section  =======-->
-
       <div class="copyright-section pt-35 pb-35">
         <div class="container">
           <div class="row align-items-md-center align-items-sm-center">
             <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 text-center text-md-left">
-              <!--=======  copyright text   =======-->
 
               <div class="copyright-segment">
                 <p>
@@ -419,38 +303,26 @@
                 <p class="copyright-text">&copy; 2021 <a href="#">Tocotoco</a>.</p>
               </div>
 
-              <!--=======  End of copyright text    =======-->
-
             </div>
-            <div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
-              <!--=======  payment info  =======-->
-
-              <div class="payment-info text-center text-md-right">
-                <p>Thanh toán <img src="/images/payment-icon.png" class="img-fluid" alt=""></p>
-              </div>
-
-              <!--=======  End of payment info  =======-->
-
-            </div>
+            
           </div>
         </div>
       </div>
 
-      <!--=======  End of copyright section  =======-->
     </footer>
-    <script>
-            $(document).ready(function() {
-            $(".tabs-menu a").click(function(event) {
-                event.preventDefault();
-                $(this).parent().addClass("current");
-                $(this).parent().siblings().removeClass("current");
-                var tab = $(this).attr("href");
-                $(".tab-content").not(tab).css("display", "none");
-                $(tab).fadeIn();
-            });
-        });
 
-        </script>
+    <script>
+      $(document).ready(function() {
+        $(".tabs-menu a").click(function(event) {
+            event.preventDefault();
+            $(this).parent().addClass("current");
+            $(this).parent().siblings().removeClass("current");
+            var tab = $(this).attr("href");
+            $(".tab-content").not(tab).css("display", "none");
+            $(tab).fadeIn();
+        });
+      });
+    </script>
        
   </body>
 </html>

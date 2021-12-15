@@ -14,6 +14,7 @@ class KhuyenmaisController < ApplicationController
 
   def edit
   end
+  
   def create
   	sem = params[:subchecked]
   	start = params[:start_date]

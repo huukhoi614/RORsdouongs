@@ -1246,7 +1246,7 @@ a.slider-btn {
   font-size: 20px;
   font-weight: 500;
   color: #fff;
-  background-color: #80bb01;
+  background-color: #1401bb;
   padding: 20px 50px;
   border-radius: 50px; }
   a.slider-btn:hover {
@@ -1445,38 +1445,12 @@ a.single-sale-add-to-cart-btn {
 =            04. Hero section            =
 =============================================*/
 .slider-bg-1 {
-  background-image: url("../images/sliders/home1-slider1.jpg"); }
-
-.slider-bg-2 {
-  background-image: url("../images/sliders/home1-slider2.jpg"); }
-
-.slider-bg-3 {
-  background-image: url("../images/sliders/home2-slider1.jpg"); }
-
-.slider-bg-4 {
-  background-image: url("../images/sliders/home2-slider2.jpg"); }
-
-.slider-bg-5 {
-  background-image: url("../images/sliders/home3-slider1.jpg"); }
-
-.slider-bg-6 {
-  background-image: url("../images/sliders/home3-slider2.jpg"); }
-
-.slider-bg-7 {
-  background-image: url("../images/sliders/home4-slider1.jpg"); }
-
-.slider-bg-8 {
-  background-image: url("../images/sliders/home4-slider2.jpg"); }
-
-.slider-bg-9 {
-  background-image: url("../images/sliders/home7-slider1.jpg"); }
-
-.slider-bg-10 {
-  background-image: url("../images/sliders/home7-slider2.jpg"); }
+  background-image: url("/images/bg.PNG");
+  }
 
 /*----------  04.1 Hero One ----------*/
 .hero-slider-one .hero-slider-item {
-  height: 800px;
+  height: 600px;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover; }
@@ -2082,7 +2056,7 @@ a.single-sale-add-to-cart-btn {
     display: block;
     overflow: hidden; }
     .single-post-wrapper .post-thumb a img {
-      width: 100%; }
+      width: 20%; }
     .single-post-wrapper .post-thumb a:hover img {
       -webkit-transform: scale(1.02);
       -ms-transform: scale(1.02);

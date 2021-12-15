@@ -2,12 +2,19 @@ module Api::V1
   class SanphamsController < ActionController::API
   
 	  def index
-	  	@sanphams =  Sanpham.select(:loaisp_id, :id, :tensanpham, :anh, :mota)
-	  	render json:  @sanphams, include: [:loaisp], methods: [:filtered_ctspham]
+		  @records = Sanpham
+			.joins("
+					join ctsphams ON ctsphams.sanpham_id = sanphams.id 
+					join banggia on banggia.ctspham_id = ctsphams.id
+					join ctkhuyenmais on ctkhuyenmais.sanpham_id = sanphams.id
+					where ctsphams.size_id = 1
+				")
+			.select("sanphams.id,sanphams.tensanpham,sanphams.anh,banggia.gia,ctkhuyenmais.tylegiam")
+		render json: @records 
 	  end
 
 	  def show
-		@sanpham = Sanpham.select(:loaisp_id, :id, :tensanpham, :anh, :mota).find(params[:id])
+		@sanpham = Sanpham.select(:id, :tensanpham, :anh).find(params[:id])
 		render json: @sanpham
 	  end
 

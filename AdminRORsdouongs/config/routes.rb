@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
+<<<<<<< HEAD
  
+=======
+  
+>>>>>>> 9369b32ab0e5f697c1640786def70003ec19defa
   resources :khuyenmais
   resources :ctkhuyenmais
 
