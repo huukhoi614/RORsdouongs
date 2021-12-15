@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+ 
   resources :khuyenmais
+  resources :ctkhuyenmais
 
   resources :dasboard
   get 'thongke/index'

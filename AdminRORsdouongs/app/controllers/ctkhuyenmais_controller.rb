@@ -1,37 +1,21 @@
-class KhuyenmaisController < ApplicationController
-  def show
+class CtkhuyenmaisController < ApplicationController
+  def index
   end
 
   def new
-  	
-  	@khuyenmai = Khuyenmai.new()
+  	@ctkhuyenmai = Ctkhuyenmai.new
   end
 
-  def index
-  	@khuyenmais= Khuyenmai.all()
-
+  def show
   end
 
   def edit
   end
   def create
-  	sem = params[:subchecked]
-  	start = params[:start_date]
-  	end_date = params[:end_date]
-  	@khuyenmai = Khuyenmai.new(khuyenmai_params)
-  	giamgiapt = params[:tylegiam]
+  	
+  	@ctkhuyenmai = Ctkhuyenmai.new(khuyenmai_params)
     respond_to do |format|
-      if @khuyenmai.save()
-      	@khuyenmai.update(ngayBD: start, ngayKT: end_date)
-      	if(sem != nil)
-          sem.each do |sem|
-            counter = 1
-             while sem[counter] != nil
-              @khuyenmaixx = create_ctkhuyenmai(@khuyenmai.id, sem[counter], giamgiapt)  
-              counter = counter + 1
-             end
-          end
-        end
+      if @ctkhuyenmai.save()
         format.html { redirect_to khuyenmais_url, notice: "Khuyenmai was successfully created." }
         format.json { render :show, status: :created, location: khuyenmai_url }
       else
@@ -44,8 +28,8 @@ class KhuyenmaisController < ApplicationController
   # PATCH/PUT /dathangs/1 or /dathangs/1.json
   def update
     respond_to do |format|
-          if @khuyenmai.update()
-            session[:dathang_id] = nil
+          if @ctkhuyenmai.update()
+           
             format.html { redirect_to khuyenmais_url, notice: "Dathang was successfully updated." }
             format.json { render :show, status: :ok, location: @khuyenmai }
           else
@@ -58,13 +42,13 @@ class KhuyenmaisController < ApplicationController
   end
   private
 	# Use callbacks to share common setup or constraints between actions.
-	def set_khuyenmai
-	  	@khuyenmai = Khuyenmai.find(params[:id])
+	def set_ctkhuyenmai
+	  	@ctkhuyenmai = Ctkhuyenmai.find(params[:id])
 	end
 
 
 	# Only allow a list of trusted parameters through.
-	def khuyenmai_params
-	  params.require(:khuyenmai).permit(:id,:tendot, :ngayBD, :ngayKT)
+	def ctkhuyenmai_params
+	  params.require(:ctkhuyenmai).permit(:id, :khuyenmai_id, :sanpham_id, :tylegiam)
 	end
 end

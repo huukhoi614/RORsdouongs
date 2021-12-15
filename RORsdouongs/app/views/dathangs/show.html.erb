@@ -118,9 +118,10 @@
                           </a></td>
                           <td class="pro-title"><a href="#"><%= a.ctspham.size.tensize %></a></td>
                           <td class="pro-price">
-                            <% Banggium.where(:id => @banggium.id).each do |bangium| %>
-                              <span><%= bangium.gia %></span>
-                            <% end %>
+                            <% banggiumm = Banggium.find(@banggium.id)%>
+                              <%togg = a.checksukien(a.ctspham.sanpham_id)%>
+                              <span><%= banggiumm.gia - banggiumm.gia*(togg/100) %></span>
+                            
                             </td>
                             <td> <p>
                               <%tongct=0%>

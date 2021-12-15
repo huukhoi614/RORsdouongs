@@ -5,5 +5,46 @@
     <div class="main-title">
         Thống Kê trong tháng
     </div>
+
 </div>
-<%= render 'form' %> 
+
+<div class="main-content">
+    <div class="box">
+        <div class="box-body overflow-scroll">
+            <table > 
+            <thead> 
+             <tr> 
+              <th class="hidden-xs">Ngày</th> 
+              <th>Tổng giá sản phẩm</th>
+              <th>Tổng giá topping</th> 
+              <th>Tổng giảm giá</th>
+              
+	          <th>Tổng Cộng</th>
+
+             </tr> 
+            </thead> 
+            <tbody>
+            	<%tong = 0%>
+            	<% thong = Thongke.find(1)%>
+            	<% for i in 0..29%>
+
+            		<% if thong.tongcong(@datebd+i) != 0%>
+	            	<tr>
+	            		<td><%= @datebd + i%> </td>
+	            		<td><%= thong.tongdongia(@datebd+i)%></td>
+	            		<td><%= thong.tongtopping(@datebd+i)%></td>
+	            		<td></td>
+	            		<td><%= thong.tongcong(@datebd+i)%></td>
+	            	</tr>
+	            	<%tong = tong + thong.tongcong(@datebd+i)%>
+	            	<%end%>
+            	<%end%>
+            	
+            	
+                
+          
+           </tbody></table> 
+           <h3>Tổng: <%= tong%>đ</h3>
+        </div>
+    </div>
+</div> 

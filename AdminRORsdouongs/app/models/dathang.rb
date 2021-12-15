@@ -6,7 +6,7 @@ class Dathang < ApplicationRecord
   has_many :ct_sp_ches, :dependent => :destroy
   def tonggiat
   	ct_sp_ches.to_a.sum { |item| item.giact}
-  	
   end
   
+
 end

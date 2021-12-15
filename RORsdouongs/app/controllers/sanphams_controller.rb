@@ -11,7 +11,7 @@ class SanphamsController < ApplicationController
   def show
   	
   	sanpham = Sanpham.find(params[:id])
-    @tylegiam = checksukien(sanpham.loaisp_id).to_f
+    @tylegiam = checksukien(sanpham.id).to_f
   	@chonthems = Chonthem.all()
   	@sizes = Size.all()
   	@ctsanphams = Ctspham.where(sanpham_id: sanpham.id)

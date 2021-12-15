@@ -10,38 +10,39 @@
 <div class="main-content">
     <div class="box">
         <div class="box-body overflow-scroll">
+            <%= form_with(model: khuyenmai) do |form| %>
             <div class="container-fluid">
                 <div class="row">
 
                     <div class="col-md-8"><div class="form">
-                        <%= form_with(model: khuyenmai) do |form| %>
+                        
+                        <% if khuyenmai.errors.any? %>
+                        <div id="error_explanation">
+                          <h2><%= pluralize(khuyenmai.errors.count, "error") %> prohibited this dathang from being saved:</h2>
+
+                          <ul>
+                            <% khuyenmai.errors.each do |error| %>
+                              <li><%= error.full_message %></li>
+                            <% end %>
+                          </ul>
+                        </div>
+                      <% end %>
                             <h3 class="name">Khuyến mãi</h3>
-                            <input type="text" class="promation-name" name="tenkhuyenmai" placeholder="Tên khuyến Mãi" value="">
+                         
+                            <%= form.text_field :tendot, class: 'promation-name', placeholder: 'Tên khuyến Mãi' %>
                             <div id="time">
                                 <h3 class="name">Thời gian</h3>
-                                <% datet = DateTime.now.year.to_s+"-"+DateTime.now.month.to_s+"-"+DateTime.now.day.to_s %>
-                                <input type="date" class="startdate" name="start_name" min="<%= datet%>" value="<%= datet%>" ><br>
+                                <% datet = DateTime.now.year.to_s+"-"+DateTime.now.month.to_s+"-"+(DateTime.now.day+1).to_s %>
+                                <input type="date" class="startdate" name="start_date" min="<%= datet%>" value="<%= datet%>" ><br>
                                 <label for="start_name" class="startlabel">Ngày bắt đầu</label>
-                                <input type="date" class="enddate" name="end_name" min="<%= datet%>" value="<%= datet%>" >
+                                <input type="date" class="enddate" name="end_date" min="<%= datet%>" value="<%= datet%>" >
                                 <label for="end_name" class="endlabel">Ngày kết thúc</label>
                             </div>
-                            <h3 class="name">Sản phảm</h3>
-                            <div class="select-box">
-                                <select class="nice-select" name="sanpham[id]" id="sanpham_id">
-                                     <option value="0" hidden="true">Vui lòng chọn sản phẩm</option>
-                                    <%@sanphams.each do |sanpham|%>
-                                       <option value="<%= sanpham.id %>" >
-                                           <%= label_tag sanpham.tensanpham, nil, class: 'loadgiadi' %>                     
-                                        </option>
-                                       
-                                    <% end %>
-                                   
-                                </select>
-                            </div>
+                            
                             <h4 class="name">Mức giảm (%)</h4>
                             <input type="number" class="startdate" name="tylegiam" value="1" min="1" max="100"><br/>
                             <button type="submit">Submit</button>
-                        <% end%>
+                     
                     </div></div>
                     <div class="col-md-4">
                         <div class="box f-height">
@@ -49,19 +50,24 @@
                                Sản phẩm khuyến mãi
                             </div>
                             <div class="box-body">
-                                <ul class="product-list">
-                                    <%@sanphams.each do |sanpham|%>
-
-
-                                    <% end %>
-                                   <input type="text" name="sanphamkm" id="sanphamkm">
-
-                                </ul>
+                                
+                                   <%counter = 1%>
+                                <% @sanphams.each do |chonthem| %>
+                                     
+                                    <% chonthemcb = "subchecked[#{counter.to_s}]"%>
+                                     <div>
+                                    <h4>
+                                        <%= check_box_tag(chonthemcb, chonthem.id)%>
+                                        <%= label_tag(chonthemcb, chonthem.tensanpham) %>
+                                    </h4></div>
+                                    <% counter = counter + 1%>
+                                   
+                                <% end %>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>   <% end%>
             
         </div>
     </div>
@@ -74,8 +80,8 @@
         $('.nice-select').change(function(){  
           var data= $(this).val();
           lick = lick + 1;
-          document.getElementById("sanphamkm").value=data;
-          document.getElementById("dem").value= lick;
+          var tr = "sanphamkm" + lick; 
+          document.getElementById(tr).value=data;
 
         });   
         

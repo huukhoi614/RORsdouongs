@@ -27,14 +27,24 @@ private
     def checksukien(loaisp_id)
         @ctkhuyenmais = Ctkhuyenmai.where(sanpham_id: loaisp_id)
         giamgia = 0.0
+        datet = DateTime.now.year.to_s+"-"+DateTime.now.month.to_s+"-"+(DateTime.now.day+1).to_s
+
         @ctkhuyenmais.each do |ctkhuyenmai|
             khuyenmai = Khuyenmai.find(ctkhuyenmai.khuyenmai_id)
-            if khuyenmai.ngayBD <= Time.now
-                if khuyenmai.ngayKT >= Time.now
-                    giamgia = giamgia.to_f + ctkhuyenmai.tylegiam.to_f
+            daybd = khuyenmai.ngayBD.year.to_s+"-"+khuyenmai.ngayBD.month.to_s+"-"+khuyenmai.ngayBD.day.to_s
+            daykt = khuyenmai.ngayKT.year.to_s+"-"+khuyenmai.ngayKT.month.to_s+"-"+khuyenmai.ngayKT.day.to_s
+            if daybd <= datet
+                if daykt >= datet
+                    giamgia = (giamgia.to_f + ctkhuyenmai.tylegiam.to_f)/100
                 end
             end
         end
         giamgia.to_f
+    end
+     def create_ctkhuyenmai(khuyenmaiid, sanphamid, tylegiam)
+        Ctchonthem.find(session[:khong])
+    rescue ActiveRecord::RecordNotFound
+        ctkhuyenmai = Ctkhuyenmai.create! khuyenmai_id: khuyenmaiid, sanpham_id: sanphamid, tylegiam: tylegiam
+        ctkhuyenmai
     end
 end

@@ -106,15 +106,20 @@
 															<%end%>
 														  	<% loaisp = sanpham.loaisp.tenloai%>
 														  	<% @khuyenmai = Khuyenmai.all%>
+														  	
 															<% @khuyenmai.each do |km|%>
-																<% if km.ngayBD <= Time.now%>
-													                <%if km.ngayKT >= Time.now%>
-													                    <% @khuyenmaiy = Khuyenmai.find(km.id)%>
-													                <%end%>
-													            <%end%>
+															<% datet = DateTime.now.year.to_s+"-"+DateTime.now.month.to_s+"-"+(DateTime.now.day+1).to_s%> 
+												            <%daybd = km.ngayBD.year.to_s+"-"+km.ngayBD.month.to_s+"-"+km.ngayBD.day.to_s%>
+												            <%daykt = km.ngayKT.year.to_s+"-"+km.ngayKT.month.to_s+"-"+km.ngayKT.day.to_s%>
+												            <%if daybd <= datet%>
+												                <%if daykt >= datet%>
+												                     <% @khuyenmaiy = Khuyenmai.find(km.id)%>
+												                <%end%>
+												            <%end%>
+														
 															<% end%>
 															<% if (@khuyenmaiy != nil)%>
-														  	<% ctkh = Ctkhuyenmai.where(:loaisp_id => sanpham.loaisp_id, :khuyenmai_id => @khuyenmaiy.id).first%>
+														  	<% ctkh = Ctkhuyenmai.where(:sanpham_id => sanpham.id, :khuyenmai_id => @khuyenmaiy.id).first%>
 														  	<%end%>
 														  	<%if ctkh != nil%>
 														  	<% ctkhuyenmai = Ctkhuyenmai.find(ctkh.id)%>
@@ -124,7 +129,7 @@
 																<% if @bangiumsx != nil%>
 																	<span class="main-price"><%= @bangiumsx.gia%> đ</span>
 																	<span class="discounted-price">
-															    	<%= (@bangiumsx.gia - @bangiumsx.gia * ctkhuyenmai.tylegiam).to_i%>đ</span>
+															    	<%= (@bangiumsx.gia - @bangiumsx.gia * (ctkhuyenmai.tylegiam/100)).to_i%>đ</span>
 																<%end%> 
 																<!--<span class="main-price">$89.00</span>-->
 															<%end%>
@@ -133,6 +138,7 @@
 																	<% if @bangiumsx != nil%>
 																    	<%= @bangiumsx.gia%>
 																	<%end%> đ</span>
+
 															<% end%>
 														</div>
 													</div>
