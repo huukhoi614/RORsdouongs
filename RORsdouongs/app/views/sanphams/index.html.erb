@@ -67,7 +67,13 @@
 																<% loaisp = sanpham.loaisp.tenloai%>
 																<% @khuyenmai = Khuyenmai.all%>
 																<!-- Check Khuyến mãi-->
-																
+																	<% @khuyenmai.each do |km|%>
+																	<% if km.ngayBD <= Time.now%>
+																		<%if km.ngayKT >= Time.now%>
+																			<% @khuyenmaiy = Khuyenmai.find(km.id)%>
+																		<%end%>
+																	<%end%>
+																<% end%>
 																<!-- Check Khuyến mãi-->
 																<% if (@khuyenmaiy != nil)%>
 																<% ctkh = Ctkhuyenmai.where(:loaisp_id => sanpham.loaisp_id, :khuyenmai_id => @khuyenmaiy.id).first%>
