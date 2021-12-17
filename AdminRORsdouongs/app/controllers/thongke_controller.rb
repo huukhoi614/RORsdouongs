@@ -18,6 +18,7 @@ class ThongkeController < ApplicationController
   	
   	
   end
+  
   private
  
 end

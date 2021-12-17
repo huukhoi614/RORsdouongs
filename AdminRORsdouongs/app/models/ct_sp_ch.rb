@@ -13,11 +13,11 @@ class CtSpCh < ApplicationRecord
 		  		tong = tong + chonthem.gia.to_i
 		  	end
 		  end
-		giamgia = checksukien(ctspham.sanpham.loaisp_id)
-	  	tong = tong + (banggium2.gia.to_i - banggium2.gia*giamgia)
+		giamgia = banggium2.gia.to_i*checksukien(ctspham.sanpham.id)*self.soluong
+	  tong = tong + (banggium2.gia.to_i)
 	 end
 	if(self.soluong.present?)
-	  tong = tong * self.soluong
+	  tong = tong * self.soluong-giamgia
 	end
 	tong.to_i
   end
@@ -25,11 +25,15 @@ private
 	def checksukien(loaisp_id)
         @ctkhuyenmais = Ctkhuyenmai.where(sanpham_id: loaisp_id)
         giamgia = 0.0
+        datet = dathang.ngaydat.year.to_s+"-"+dathang.ngaydat.month.to_s+"-"+dathang.ngaydat.day.to_s
+
         @ctkhuyenmais.each do |ctkhuyenmai|
             khuyenmai = Khuyenmai.find(ctkhuyenmai.khuyenmai_id)
-            if khuyenmai.ngayBD <= dathang.ngaydat
-                if khuyenmai.ngayKT >= dathang.ngaydat
-                    giamgia = giamgia.to_f + ctkhuyenmai.tylegiam.to_f
+            daybd = khuyenmai.ngayBD.year.to_s+"-"+khuyenmai.ngayBD.month.to_s+"-"+khuyenmai.ngayBD.day.to_s
+            daykt = khuyenmai.ngayKT.year.to_s+"-"+khuyenmai.ngayKT.month.to_s+"-"+khuyenmai.ngayKT.day.to_s
+            if daybd <= datet
+                if daykt >= datet
+                    giamgia = (giamgia.to_f + ctkhuyenmai.tylegiam.to_f)/100
                 end
             end
         end

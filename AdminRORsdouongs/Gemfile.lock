@@ -187,7 +187,6 @@ GEM
     minitest (5.14.4)
     msgpack (1.4.2)
     multipart-post (2.1.1)
-    mysql2 (0.5.3)
     nio4r (2.5.8)
     nokogiri (1.12.5-x64-mingw32)
       racc (~> 1.4)
@@ -326,7 +325,6 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   kaminari
   lazy_high_charts
-  mysql2 (~> 0.5)
   phonelib
   puma (~> 5.0)
   rack-cors

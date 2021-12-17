@@ -30,10 +30,12 @@
 
             		<% if thong.tongcong(@datebd+i) != 0%>
 	            	<tr>
-	            		<td><%= @datebd + i%> </td>
+                 <% d =@datebd + i%>
+                 <%  datet = d.year.to_s+"-"+d.month.to_s+"-"+d.day.to_s%>
+	            		<td><%= datet%> </td>
 	            		<td><%= thong.tongdongia(@datebd+i)%></td>
 	            		<td><%= thong.tongtopping(@datebd+i)%></td>
-	            		<td></td>
+	            		<td><%= thong.giamgia(@datebd+i)%></td>
 	            		<td><%= thong.tongcong(@datebd+i)%></td>
 	            	</tr>
 	            	<%tong = tong + thong.tongcong(@datebd+i)%>

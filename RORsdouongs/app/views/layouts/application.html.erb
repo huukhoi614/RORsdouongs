@@ -8,12 +8,7 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag "bootstrap.min" %>
-    <%= stylesheet_link_tag "elegent.min" %>
-    <%= stylesheet_link_tag "font-awesome.min" %>
-    <%= stylesheet_link_tag "helper" %>
-    <%= stylesheet_link_tag "plugins" %>
-    <%= stylesheet_link_tag "main" %>
+
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
 
   </head>
@@ -130,9 +125,10 @@
       </div>
 
     </header>
+<div class="header-top pt-10 pb-10 pt-lg-10 pb-lg-10 pt-md-10 pb-md-10" style="background-color: #DDDDDD">
 
     <%= yield %>
-
+</div>
     <footer>
       <div class="newsletter-section pt-50 pb-50">
         <div class="container">

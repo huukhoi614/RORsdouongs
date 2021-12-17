@@ -27,7 +27,7 @@ private
     def checksukien(loaisp_id)
         @ctkhuyenmais = Ctkhuyenmai.where(sanpham_id: loaisp_id)
         giamgia = 0.0
-        datet = DateTime.now.year.to_s+"-"+DateTime.now.month.to_s+"-"+(DateTime.now.day+1).to_s
+        datet = DateTime.now.year.to_s+"-"+DateTime.now.month.to_s+"-"+(DateTime.now.day).to_s
 
         @ctkhuyenmais.each do |ctkhuyenmai|
             khuyenmai = Khuyenmai.find(ctkhuyenmai.khuyenmai_id)
