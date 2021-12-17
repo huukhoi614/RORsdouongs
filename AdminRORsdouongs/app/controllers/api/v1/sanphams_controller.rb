@@ -14,8 +14,8 @@ module Api::V1
 	  end
 
 	  def show
-		@sanpham = Sanpham.select(:id, :tensanpham, :anh).find(params[:id])
-		render json: @sanpham
+		@sanpham = Sanpham.select(:loaisp_id, :id, :tensanpham, :anh).find(params[:id])
+		render json: @sanpham, methods: [:ctspham_all]
 	  end
 
 	end
