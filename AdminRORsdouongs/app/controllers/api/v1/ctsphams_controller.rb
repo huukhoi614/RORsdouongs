@@ -2,7 +2,7 @@ module Api::V1
   class CtsphamsController < ActionController::API
   
 	  def index
-		@ctsphams = Ctspham.select(:id,:sanpham_id,:size_id)
+		@ctsphams = Ctspham.joins(:size,:banggia).select(:id,:tensize,:gia)
 		render json: @ctsphams
 	  end
 

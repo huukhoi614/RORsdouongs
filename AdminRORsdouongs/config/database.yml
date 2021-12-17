@@ -1,8 +1,8 @@
 default: &default
-  adapter: sqlserver
+  adapter: mysql2
   encoding: utf8
-  username: khoi
-  password: 123456
+  username: root
+  password: mysql
   host: localhost
 
 development:
