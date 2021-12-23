@@ -23,13 +23,14 @@ Rails.application.routes.draw do
   root 'dasboard#index'
   get 'sanpham/showtheosize'=> 'sanphams#showtheosize'
   
-    get 'home' => 'home#trangchu'
+  get 'home' => 'home#trangchu'
+
+  controller :sessions do
+      get 'login' => :new
+      post 'login' => :create
+      delete 'logout' => :destroy
+  end
   
-    controller :sessions do
-        get 'login' => :new
-        post 'login' => :create
-        delete 'logout' => :destroy
-    end
   namespace :api do
     namespace :v1 do
       resources :loaisps
@@ -42,6 +43,8 @@ Rails.application.routes.draw do
       resources :khachhangs
       resources :ctchonthems
       resources :dathangs
+      resources :ct_sp_ches
+      resources :users
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
