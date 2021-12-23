@@ -17,7 +17,6 @@ module RORsdouongs
     # in config/environments, which are processed later.
     #
 
-
     # Rails 5/6
     config.api_only = true
     config.middleware.insert_before 0, Rack::Cors do

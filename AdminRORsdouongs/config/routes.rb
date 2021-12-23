@@ -45,6 +45,7 @@ Rails.application.routes.draw do
       resources :dathangs
       resources :ct_sp_ches
       resources :users
+      resources :khuyenmais
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
