@@ -14,7 +14,7 @@ module Api::V1
 	  end
 
 	  def show
-		@sanpham = Sanpham.select(:id, :tensanpham, :anh).find(params[:id])
+		@sanpham = Sanpham.joins("join ctkhuyenmais on ctkhuyenmais.sanpham_id = sanphams.id").select(:id, :tensanpham, :anh,:tylegiam).find(params[:id])
 		render json: @sanpham
 	  end
 
