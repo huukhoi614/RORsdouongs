@@ -2,12 +2,12 @@ module Api::V1
   class DathangsController < ActionController::API
   
 	  def index
-        @dathangs = Dathang.all
+        @dathangs = Dathang.select(:id,:nguoinhan,:diachinhan,:ngaydat,:ngayduyet,:ngaygiao,:ngaynhan,:tonggia,:hinhthucmua,:cuahang_id,:vanchuyen_id,:order_status_id,:khachhang_id,:phiship)
         render json: @dathangs
 	  end
 
 	  def show
-        @dathang = Dathang.find(params[:id])
+        @dathang = Dathang.select(:id,:nguoinhan,:diachinhan,:ngaydat,:ngayduyet,:ngaygiao,:ngaynhan,:tonggia,:hinhthucmua,:cuahang_id,:vanchuyen_id,:order_status_id,:khachhang_id,:phiship).find(params[:id])
         render json: @dathang
 	  end
 
