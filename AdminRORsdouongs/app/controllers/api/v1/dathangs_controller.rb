@@ -39,7 +39,7 @@ module Api::V1
           :soluong,
           :giact,
           ctchonthems_attributes: [
-            :chonthem_id,:gia
+            :chonthem_id
           ]
         ]
       )
