@@ -16,29 +16,35 @@ module Api::V1
     end
 
     def create
-      dathang = Dathang.create(
-        {
-          ngaydat: params[:ngaydat],
-          ngayduyet: params[:ngayduyet],
-          ngaygiao: params[:ngaygiao],
-          ngaynhan: params[:ngaynhan],
-          hinhthucmua: params[:hinhthucmua],
-          phiship: params[:phiship],
-          tonggia: params[:tonggia],
-          order_status_id: params[:order_status_id],
-          vanchuyen_id: params[:vanchuyen_id],
-          khachhang_id: params[:khachhang_id],
-          cuahang_id: params[:cuahang_id],
-          diachinhan: params[:diachinhan],
-          nguoinhan: params[:nguoinhan]
-        }
-      )
+      dathang = Dathang.new(dathang_params)
       if dathang.save
         render json: "Order Success"
       else
         render json: "Order Errror"
       end
     end
+    
+    private
+    def dathang_params
+      params.require(:dathang).permit(
+        :ngaydat,:ngayduyet,
+        :ngaygiao,:ngaynhan,
+        :hinhthucmua,:phiship,
+        :tonggia,:order_status_id,
+        :vanchuyen_id,
+        :khachhang_id,:cuahang_id,
+        :nguoinhan,:diachinhan,
+        ct_sp_ches_attributes: [
+          :ctspham_id,
+          :soluong,
+          :giact,
+          ctchonthems_attributes: [
+            :chonthem_id,:gia
+          ]
+        ]
+      )
+    end
+
 
 	end
 end
