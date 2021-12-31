@@ -26,7 +26,7 @@
                                 <th>Ngày bắt đầu</th>
                                 <th>Ngày kết thúc</th>
                                 
-                                <th>#</th>
+                                <th>Tình trạng</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -42,12 +42,29 @@
                                     <td><%= khuyenmai.ngayBD%></td>
                                     <td><%= khuyenmai.ngayKT%></td>
                                     
-                                    <td>
-                                        <a href="promation-new.html"><span class="order-status order-update">
-                                                Update
+                                    <% if khuyenmai.ngayBD <= Time.now%>
+                                        <%if khuyenmai.ngayKT >= Time.now%>
+                                            <% @khuyenmaiy = Khuyenmai.find(khuyenmai.id)%>
+                                        <%end%>
+                                    <%end%>
+                                   
+                                    <% if (@khuyenmaiy != nil)%>
+                                     <td>
+                                        <a href="promation-new.html"><span class="order-update">
+                                               On
                                             </span></a>
                                         
-                                    </td>
+                                        </td>
+                                    <%else%>
+                                        <td>
+                                            <a href="promation-new.html"><span >
+                                                   Off
+                                                </span></a>
+                                            
+                                        </td>
+                                    <%end%>
+                                   
+                                    
                                 </tr>
                             <%end%>
                             

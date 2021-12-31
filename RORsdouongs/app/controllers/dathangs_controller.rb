@@ -38,16 +38,22 @@ class DathangsController < ApplicationController
   # PATCH/PUT /dathangs/1 or /dathangs/1.json
   def update
     khachhang = Khachhang.checkphone(session[:phone_user]) 
-    @dathang = current_dathang(khachhang.id)
     cuhang = params[:cuahang_id]
     diachinhan = params[:diachinhan]
     order_status_id = params[:order_status_id]
     if diachinhan == nil
       diachinhan = khachhang.diachi
     end
+    ctspch = params[:ct_sp_ch]
+    soluong = params[:soluong]
+
     
     respond_to do |format|
       if order_status_id == nil
+         if ctspch != nil
+          ct_sp_ch = CtSpCh.find(ctspch)
+          ct_sp_ch.update(soluong: soluong)
+        end
         if @dathang.update(cuahang_id: cuhang, diachinhan: diachinhan)
           format.html { redirect_to @dathang, notice: "Dathang was successfully updated." }
           format.json { render :show, status: :ok, location: @dathang }

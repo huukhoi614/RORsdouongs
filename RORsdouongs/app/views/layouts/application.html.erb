@@ -25,7 +25,7 @@
                   <li><a href="#">Thanh toán</a></li>
                   <%if session[:user_id] != nil%>
                     <li><a href="/khachhangs">Tài Khoản</a></li>
-                    <li><%= link_to "Đăng xuất", '/logout', :method => :delete%></li>
+                    <li><%= link_to "Đăng xuất",'sessions/destroy' %></li>
                     <li><a href="#" id="account-info"></a></li>
                   <%else%>
                     <li><a href="/login">Đăng nhập</a></li>

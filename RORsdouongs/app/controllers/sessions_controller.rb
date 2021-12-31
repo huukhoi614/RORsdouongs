@@ -3,10 +3,10 @@ class SessionsController < ApplicationController
 	end
 
 	def create 
-	    if user = User.authenticate(params[:name], params[:password])
+	    if user = Khachhang.authenticate(params[:sodienthoai], params[:password])
 	        session[:user_id] = user.id
 
-	        session[:phone_user] = user.phone
+	        session[:phone_user] = user.sodienthoai
 
 	        session[:point_user] = user.point
 	        

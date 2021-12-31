@@ -16,9 +16,6 @@ class CtSpChesController < ApplicationController
   end
 
   def create
-  	if(session[:phone_user] == nil)
-  		redirect_to login_url
-  	else
 	  	khachhang = Khachhang.find(1)
 	   @dathang = current_dathang(khachhang.id)
 
@@ -52,7 +49,7 @@ class CtSpChesController < ApplicationController
 	          format.json { render json: @ct_sp_ch.errors, status: :unprocessable_entity }
 	        end
 	    end
-    end
+    
   end
 
   # PATCH/PUT /line_items/1 or /line_items/1.json

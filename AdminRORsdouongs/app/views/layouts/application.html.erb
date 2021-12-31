@@ -15,7 +15,7 @@
     <%= csp_meta_tag %>
 
      <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%# <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %> %>
+    
    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
     
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
@@ -61,40 +61,17 @@
             </li>
             <li>
                 <a href="/khuyenmais">
-                    <i class='bx bx-shopping-bag'></i>
+                    <i class='bx bx-gift'></i>
                     <span>Giảm giá</span>
                 </a>
             </li>
             <li>
                 <a href="/thongke/theongay">
                     <i class='bx bx-chart'></i>
-                    <span>Thống kê</span>
+                    <span>thống kê</span>
                 </a>
             </li>
-            <li class="sidebar-submenu">
-                <a href="#" class="sidebar-menu-dropdown">
-                    <i class='bx bx-user-circle'></i>
-                    <span>account</span>
-                    <div class="dropdown-icon"></div>
-                </a>
-                <ul class="sidebar-menu sidebar-menu-dropdown-content">
-                    <li>
-                        <a href="#">
-                            edit profile
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            account settings
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            billing
-                        </a>
-                    </li>
-                </ul>
-            </li>
+
             <li class="sidebar-submenu">
                 <a href="#" class="sidebar-menu-dropdown">
                     <i class='bx bx-category'></i>
@@ -119,11 +96,34 @@
                 <i class="fa fa-cart-plus "></i>
                 <span>Đơn hàng</span></a>
             </li>
+            <% if session[:dathang_id] != nil %>
+
+            <li>
+                <a href="/dathangs/<%= session[:dathang_id]%>">
+                    <i class='bx bx-shopping-bag'></i>
+                    <span>Bán hàng</span>
+                </a>
+            </li><%end%>
             <li>
                 <a href="#">
                     <i class='bx bx-calendar'></i>
                     <span>Chi nhánh</span>
                 </a>
+            </li>
+            <li class="sidebar-submenu">
+                <a href="#" class="sidebar-menu-dropdown">
+                    <i class='bx bx-cog'></i>
+                    <span>cài đăt</span>
+                    <div class="dropdown-icon"></div>
+                </a>
+                <ul class="sidebar-menu sidebar-menu-dropdown-content">
+                    <li>
+                        <a href="#" class="darkmode-toggle" id="darkmode-toggle">
+                            darkmode
+                            <span class="darkmode-switch"></span>
+                        </a>
+                    </li>
+                </ul>
             </li>
         </ul>
         <!-- END SIDEBAR MENU -->

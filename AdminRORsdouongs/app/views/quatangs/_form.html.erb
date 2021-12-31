@@ -1,0 +1,37 @@
+<%= form_with(model: quatang) do |form| %>
+  <% if quatang.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(quatang.errors.count, "error") %> prohibited this quatang from being saved:</h2>
+
+      <ul>
+        <% quatang.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :soluongmua %>
+    <%= form.text_field :soluongmua %>
+  </div>
+
+  <div class="field">
+    <%= form.label :soluongtang %>
+    <%= form.text_field :soluongtang %>
+  </div>
+
+  <div class="field">
+    <%= form.label :giamgiathem %>
+    <%= form.text_field :giamgiathem %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ctkhuyenmai_id %>
+    <%= form.text_field :ctkhuyenmai_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

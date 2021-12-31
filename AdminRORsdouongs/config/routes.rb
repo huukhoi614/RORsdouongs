@@ -1,7 +1,24 @@
 Rails.application.routes.draw do
+  namespace :api do
+    namespace :v1 do
+      resources :loaisps
+      resources :sanphams
+      resources :ctsphams
+      resources :cuahangs
+      resources :sizes
+      resources :chonthems
+      resources :bangiums
+      resources :khachhangs
+      resources :ctchonthems
+      resources :dathangs
+      resources :ct_sp_ches
+      resources :users
+      resources :khuyenmais
+    end
+  end
+  resources :quatangs
   resources :khuyenmais
-  resources :ctkhuyenmais
-
+  
   resources :dasboard
   get 'thongke/index'
   get 'thongke/theongay'
@@ -23,30 +40,14 @@ Rails.application.routes.draw do
   root 'dasboard#index'
   get 'sanpham/showtheosize'=> 'sanphams#showtheosize'
   
-  get 'home' => 'home#trangchu'
-
-  controller :sessions do
-      get 'login' => :new
-      post 'login' => :create
-      delete 'logout' => :destroy
-  end
+    get 'home' => 'home#trangchu'
   
-  namespace :api do
-    namespace :v1 do
-      resources :loaisps
-      resources :sanphams
-      resources :ctsphams
-      resources :cuahangs
-      resources :sizes
-      resources :chonthems
-      resources :bangiums
-      resources :khachhangs
-      resources :ctchonthems
-      resources :dathangs
-      resources :ct_sp_ches
-      resources :users
-      resources :khuyenmais
+    controller :sessions do
+        get 'login' => :new
+        post 'login' => :create
+        delete 'logout' => :destroy
     end
-  end
+
+  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

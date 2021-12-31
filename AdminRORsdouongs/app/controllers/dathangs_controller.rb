@@ -37,8 +37,6 @@ class DathangsController < ApplicationController
 
   # PATCH/PUT /dathangs/1 or /dathangs/1.json
   def update
-    
-    
     order_status_id = params[:order_status_id]
 
     respond_to do |format|
@@ -52,7 +50,7 @@ class DathangsController < ApplicationController
             format.json { render json: @dathang.errors, status: :unprocessable_entity }
           end
         else
-          if @dathang.update(order_status_id: order_status_id, ngaydat: DateTime.now, ngaynhan: DateTime.now)
+          if @dathang.update(order_status_id: order_status_id, ngaynhan: DateTime.now, tonggia: @dathang.tonggiat)
             session[:dathang_id] = nil
             format.html { redirect_to dathangs_url, notice: "Dathang was successfully updated." }
             format.json { render :show, status: :ok, location: @dathang }

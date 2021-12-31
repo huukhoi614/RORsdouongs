@@ -3,12 +3,12 @@ class KhuyenmaisController < ApplicationController
   end
 
   def new
-  	
-  	@khuyenmai = Khuyenmai.new()
+    
+    @khuyenmai = Khuyenmai.new()
   end
 
   def index
-  	@khuyenmais= Khuyenmai.all()
+    @khuyenmais= Khuyenmai.all()
 
   end
 
@@ -16,21 +16,31 @@ class KhuyenmaisController < ApplicationController
   end
   
   def create
-  	sem = params[:subchecked]
-  	start = params[:start_date]
-  	end_date = params[:end_date]
-  	@khuyenmai = Khuyenmai.new(khuyenmai_params)
-  	giamgiapt = params[:tylegiam]
+    sem = params[:subchecked]
+    start = params[:start_date]
+    end_date = params[:end_date]
+    @khuyenmai = Khuyenmai.new(khuyenmai_params)
+    giamgiapt = params[:tylegiam]
+    soluongmua = params[:soluongmua]
+    soluongtang = params[:soluongtang]
     respond_to do |format|
       if @khuyenmai.save()
-      	@khuyenmai.update(ngayBD: start, ngayKT: end_date)
-      	if(sem != nil)
+        @khuyenmai.update(ngayBD: start, ngayKT: end_date)
+        if(sem != nil)
           sem.each do |sem|
             counter = 1
              while sem[counter] != nil
               @khuyenmaixx = create_ctkhuyenmai(@khuyenmai.id, sem[counter], giamgiapt)  
               counter = counter + 1
              end
+          end
+        end
+        if(soluongmua != 0)
+          if(sem != nil)
+            @ctkhuyenmais = Ctkhuyenmai.where(:khuyenmai_id => @khuyenmai.id)
+            @ctkhuyenmais.each do |ctkm|
+              @quatang = create_quatang(ctkm.id, soluongmua, soluongtang)
+            end
           end
         end
         format.html { redirect_to khuyenmais_url, notice: "Khuyenmai was successfully created." }
@@ -58,14 +68,14 @@ class KhuyenmaisController < ApplicationController
     end
   end
   private
-	# Use callbacks to share common setup or constraints between actions.
-	def set_khuyenmai
-	  	@khuyenmai = Khuyenmai.find(params[:id])
-	end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_khuyenmai
+      @khuyenmai = Khuyenmai.find(params[:id])
+  end
 
 
-	# Only allow a list of trusted parameters through.
-	def khuyenmai_params
-	  params.require(:khuyenmai).permit(:id,:tendot, :ngayBD, :ngayKT)
-	end
+  # Only allow a list of trusted parameters through.
+  def khuyenmai_params
+    params.require(:khuyenmai).permit(:id,:tendot, :ngayBD, :ngayKT)
+  end
 end

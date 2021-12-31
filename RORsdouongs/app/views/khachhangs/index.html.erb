@@ -12,9 +12,8 @@
             </div>
         </div>
     </div>
-    <% khachhang = Khachhang.where(sodienthoai:  session[:phone_user]).first%>
-    <% khachhangx = Khachhang.find(khachhang.id)%>
-    <% @user = User.find(session[:user_id])%>
+    <% khachhang = Khachhang.find(session[:user_id])%>
+    
     <!--=====  End of breadcrumb area  ======-->
 
     <!--=============================================
@@ -55,7 +54,7 @@
                                         <h3>Dashboard</h3>
 
                                         <div class="welcome">
-                                            <p>Hello, <strong><%= @user.name%></strong></p>
+                                            <p>Hello, <strong><%= khachhang.sodienthoai%></strong></p>
                                         </div>
 
                                     </div>
@@ -69,7 +68,7 @@
 
                                         <div class="myaccount-table table-responsive text-center">
                                             <table class="table table-bordered">
-                                                <% @dathangs = Dathang.where(khachhang_id: khachhangx.id)%>
+                                                <% @dathangs = Dathang.where(khachhang_id: khachhang.id)%>
                                                 <thead class="thead-light">
                                                     <tr>
                                                         <th>Mã đơn hàng</th>
@@ -109,21 +108,16 @@
                                                    
                                                     <address>
                                                           
-                                                        <p><strong><%= khachhangx.tenKH%></strong></p>
-                                                        <p>Điểm: <%= @user.point%> điểm</p>
-                                                        <p>Địa chỉ: <%= khachhangx.diachi%></p>
-                                                        <p>Mobile: <%= @user.phone%></p> 
+                                                        <p><strong><%= khachhang.tenKH%></strong></p>
+                                                        <p>Điểm: <%= khachhang.point%> điểm</p>
+                                                        <p>Địa chỉ: <%= khachhang.diachi%></p>
+                                                        <p>Mobile: <%= khachhang.sodienthoai%></p> 
                                                        
                                                     </address>
                                                 </div>
                                                 <div class=row>
-                                                    <% if khachhangx == nil%>
-                                                        <%= link_to 'Thêm thông tin', new_khachhang_path %><i class="fa fa-edit"></i>
-                                                    <%else%>
-                                                        <%= link_to 'Sửa thông tin', edit_khachhang_path(khachhangx) %> <i class="fa fa-edit"></i>
+                                                        <%= link_to 'Thêm thông tin', edit_khachhang_path(khachhang) %> <i class="fa fa-edit"></i>
 
-                                                    <%end%>
-                                                   
                                                 </div>
 
                                         </div>

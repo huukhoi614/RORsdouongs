@@ -13,6 +13,7 @@
             <div class="box box-hover">
                 <!-- COUNTER -->
                 <div class="counter">
+                    <a href="/dathangs">
                     <div class="counter-title">
                         Tổng đơn hàng
                     </div>
@@ -21,7 +22,7 @@
                             <%= Dathang.count%>
                         </div>
                         <i class='bx bx-shopping-bag'></i>
-                    </div>
+                    </div></a>
                 </div>
                 <!-- END COUNTER -->
             </div>
@@ -134,17 +135,21 @@
                         </thead>
                         <tbody>
                             <% @cuahangs.each do |ch|%>
-                            <tr>
-                                <td><%= ch.id%></td>
-                                <td>
-                                    <div class="order-owner">
-                                        <span><%= ch.tencuahang%></span>
-                                    </div>
-                                </td>
-                                <td>2021-05-09</td>
-                              <% @dathangs = Dathang.where(cuahang_id: ch.id)%>
-                                <td><%= @dathangs.where(ngaynhan: DateTime.now).sum(:tonggia)%>đ</td>
-                            </tr>
+                                <tr>
+                                    <td><%= ch.id%></td>
+                                    <td>
+                                        <div class="order-owner">
+                                            <span><%= ch.tencuahang%></span>
+                                        </div>
+                                    </td>
+                                    <% d = DateTime.now%>
+                                     <%  datet = d.year.to_s+"-"+d.month.to_s+"-"+d.day.to_s%>
+                                    <td><%= datet%> </td>
+                                   
+                                  
+                                    <td><% @dathangs = Dathang.where(cuahang_id: ch.id)%>
+                                        <%= @dathangs.where(ngaynhan: DateTime.now).sum(:tonggia)%>đ</td>
+                                </tr>
                             <%end%>
                            
                             
@@ -171,27 +176,6 @@
             </div>
             <!-- END CATEGORY CHART -->
         </div>
-        <div class="col-5 col-md-12 col-sm-12">
-            <!-- CUSTOMERS CHART -->
-            <div class="box f-height">
-            	<div class="box-header text-center">
-                   <h4>Biểu đồ tổng doanh thu</h4>
-                </div>
-                <div class="box-header">
-                    <%= line_chart Dathang.group(:ngaynhan).sum(:tonggia)%>
-                    
-                </div>
-                
-                
-            </div>
-            <!-- END CUSTOMERS CHART -->
-        </div>
-        <div class="col-12">
-            <!-- BRANCH TABLE -->
-            <div class="box">
-                
-            </div>
-            <!-- END BRANCH TABLE -->
-        </div>
+       
     </div>
 </div>

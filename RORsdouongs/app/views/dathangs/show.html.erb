@@ -1,62 +1,4 @@
-<!--<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Ngaydat:</strong>
-  <%= @dathang.ngaydat %>
-</p>
-
-<p>
-  <strong>Ngayduyet:</strong>
-  <%= @dathang.ngayduyet %>
-</p>
-
-<p>
-  <strong>Ngaygiao:</strong>
-  <%= @dathang.ngaygiao %>
-</p>
-
-<p>
-  <strong>Ngaynhan:</strong>
-  <%= @dathang.ngaynhan %>
-</p>
-
-<p>
-  <strong>Hinhthucmua:</strong>
-  <%= @dathang.hinhthucmua %>
-</p>
-
-<p>
-  <strong>Phiship:</strong>
-  <%= @dathang.phiship %>
-</p>
-
-<p>
-  <strong>Tonggia:</strong>
-  <%= @dathang.tonggia %>
-</p>
-
-<p>
-  <strong>Order status:</strong>
-  <%= @dathang.order_status_id %>
-</p>
-
-<p>
-  <strong>Vanchuyen:</strong>
-  <%= @dathang.vanchuyen_id %>
-</p>
-
-<p>
-  <strong>Khachhang:</strong>
-  <%= @dathang.khachhang_id %>
-</p>
-
-<p>
-  <strong>Cuahang:</strong>
-  <%= @dathang.cuahang_id %>
-</p>
-
-<%= link_to 'Edit', edit_dathang_path(@dathang) %> |
-<%= link_to 'Back', dathangs_path %>-->
 <div class="breadcrumb-area mb-50">
     <div class="container">
       <div class="row">
@@ -99,12 +41,16 @@
                     <th >Giá T phần thêm</th>
                     <th class="pro-quantity">Số lượng</th>
                     <th class="pro-subtotal">Tổng</th>
+                     <th class="pro-subtotal">Tặng</th>
                     <th class="pro-remove"> </th>
                   </tr>
                 </thead>
                 <tbody>
                   <% @dathang.ct_sp_ches.each do |a| %>
                       <tr>
+
+                        <%= form_with(model: @dathang, :url => dathang_path) do |form| %>
+                          <input type="hidden" name="ct_sp_ch" value="<%= a.id%>">
                           <% @banggium = Banggium.where(:ctspham_id => a.ctspham.id).last%>
                           <td class="pro-thumbnail"><a href="#"><img src="/images/thucuong/<%= a.ctspham.sanpham.anh%>"
                             class="img-fluid" width="50" height="70" alt="<%= a.ctspham.sanpham.tensanpham %>" ></a></td>
@@ -120,7 +66,7 @@
                           <td class="pro-price">
                             <% banggiumm = Banggium.find(@banggium.id)%>
                               <%togg = a.checksukien(a.ctspham.sanpham_id)%>
-                              <span><%= banggiumm.gia - banggiumm.gia*(togg/100) %></span>
+                              <span><%= (banggiumm.gia - banggiumm.gia*togg).to_i %></span>
                             
                             </td>
                             <td> <p>
@@ -131,12 +77,16 @@
                               <%= tongct%>
                             </p></td>
                           <td class="pro-quantity">
-                            <div class="pro-qty"><input type="number" value="<%= a.soluong%>"></div>
+                            <div class="pro-qty"><input type="number" name="soluong" value="<%=a.soluong%>"> </div>
                           </td>
                           <td class="pro-subtotal"><span><%= a.giact %></span></td>
-                          <% if @dathang.order_status.tenStt !='Hoàn thành'%>
-                          <td class="pro-remove"><%= link_to 'Xóa', ct_sp_ch_url(a.id), method: :delete, data: { confirm: 'Are you sure?' } %></td><%end%>
-                          
+                          <td class="pro-subtotal"><span><%= a.quatangsl(a.ctspham.sanpham_id, a.soluong) %></span></td>
+                          <% if @dathang.order_status.tenStt =='Đang tiến hành'%>
+                           <td align="center">
+                            <button type="submit" class="btn"><u>Cập nhật</u> |</button>
+                            <%= link_to 'Xóa', ct_sp_ch_url(a.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+                          </td> <%end%>
+                          <% end -%>
                       </tr>
                   <% end %>
                 </tbody>
@@ -205,7 +155,7 @@
                   <h2>Tổng cộng <span ><%= @dathang.tonggia%></span></h2>
                 </div>
                 <div class="cart-summary-button">
-                  <% if @dathang.order_status.tenStt !='Hoàn thành'%>
+                   <% if @dathang.order_status.tenStt =='Đang tiến hành'%>
                   <button type="submit" class="checkout-btn">Mua hàng</button><%end%>
                 </div>
               </div>

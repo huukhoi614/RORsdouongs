@@ -40,7 +40,14 @@
                             </div>
                             
                             <h4 class="name">Mức giảm (%)</h4>
-                            <input type="number" class="startdate" name="tylegiam" value="1" min="1" max="100"><br/>
+                            <input type="number" class="startdate" name="tylegiam" value="1" min="0" max="100">
+                            <h3 class="name">Quà tặng</h3>
+                            <% datet = DateTime.now.year.to_s+"-"+DateTime.now.month.to_s+"-"+(DateTime.now.day+1).to_s %>
+                            <h4 class="startdate">Số lượng mua</h4>
+                            <input type="number" class="enddate" name="soluongmua" value="0" min="0" max="100" >
+                             <h4 class="startdate">số lượng tặng</h4>
+                            <input type="number"  class="enddate" name="soluongtang" value="0" min="0" max="100" ><br/>
+                           
                             <button type="submit">Submit</button>
                      
                     </div></div>

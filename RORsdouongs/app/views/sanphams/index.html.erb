@@ -13,7 +13,7 @@
 			</div>
 		</div>
 	</div>
-
+ <%datet = DateTime.now.year.to_s+"-"+DateTime.now.month.to_s+"-"+DateTime.now.day.to_s%>
 	<div class="shop-page-container mb-50">
 		<div class="container-fluid">
 			<div class="row">
@@ -67,37 +67,53 @@
 																<% loaisp = sanpham.loaisp.tenloai%>
 																<% @khuyenmai = Khuyenmai.all%>
 																<!-- Check Khuyến mãi-->
-																	<% @khuyenmai.each do |km|%>
-																	<% if km.ngayBD <= Time.now%>
-																		<%if km.ngayKT >= Time.now%>
+																<%tamtien = 0%>
+																<% @khuyenmai.each do |km|%>
+																	<%	daybd = km.ngayBD.year.to_s+"-"+km.ngayBD.month.to_s+"-"+km.ngayBD.day.to_s%>
+            														<%	daykt = km.ngayKT.year.to_s+"-"+km.ngayKT.month.to_s+"-"+km.ngayKT.day.to_s%>
+																	<% if daybd <= datet%>
+																		<%if daykt >= datet%>
 																			<% @khuyenmaiy = Khuyenmai.find(km.id)%>
+																			<% if (@khuyenmaiy != nil)%>
+																				<%@ctkhuyenmaim = Ctkhuyenmai.where(khuyenmai_id: @khuyenmaiy.id, sanpham_id: ctsanphamss1.sanpham_id).first%>
+																				
+																				<%if @ctkhuyenmaim != nil%>
+																					
+																					<% if @ctkhuyenmaim.tylegiam != 0.0%>
+																						
+																						 <span class="main-price"><%= @bangiumsx.gia%>đ</span> -
+                                    													<span class="discounted-price" ><%= @bangiumsx.gia - (@ctkhuyenmaim.tylegiam/100*@bangiumsx.gia).to_i%></span>đ
+                                    													<%tamtien = 1%>
+                                    												<%else%>
+                                    													<span class="discounted-price" ><%= @bangiumsx.gia%></span>đ
+                                    													<% quatang = Quatang.where(ctkhuyenmai_id: @ctkhuyenmaim.id).last%>
+
+                                    													(Mua <%= quatang.soluongmua%> Tặng <%= quatang.soluongtang%>)
+                                    													<%tamtien = 1%>
+																					<%end%>
+
+																				<%end%>
+
+
+																			<%end%>
 																		<%end%>
+
 																	<%end%>
+
 																<% end%>
+																<% if tamtien == 0%>
+																	<span class="discounted-price" ><%= @bangiumsx.gia%></span>đ 
+																<%end%>
 																<!-- Check Khuyến mãi-->
-																<% if (@khuyenmaiy != nil)%>
-																<% ctkh = Ctkhuyenmai.where(:loaisp_id => sanpham.loaisp_id, :khuyenmai_id => @khuyenmaiy.id).first%>
-																<%end%>
-																<%if ctkh != nil%>
-																<% ctkhuyenmai = Ctkhuyenmai.find(ctkh.id)%>
 																
-																<% if (ctkhuyenmai != nil)%>
-																	<% if @bangiumsx != nil%>
-																		<span class="main-price"><%= @bangiumsx.gia%> đ</span>
-																		<span class="discounted-price">
-																		<%= (@bangiumsx.gia - @bangiumsx.gia * ctkhuyenmai.tylegiam).to_i%>đ</span>
-																	<%end%> 
-																<%end%>
-																<%else%>
-																	<span class="discounted-price">
-																		<% if @bangiumsx != nil%>
-																			<%= @bangiumsx.gia%>
-																		<%end%> đ</span>
-																<% end%>
 															</div>
+															
 														</div>
+
 													</div>
+
 												</div>
+
 											<% end %>
 										</div>
 									</div>

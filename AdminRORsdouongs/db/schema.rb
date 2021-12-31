@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_11_013443) do
+ActiveRecord::Schema.define(version: 2021_12_31_024654) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -131,6 +131,9 @@ ActiveRecord::Schema.define(version: 2021_12_11_013443) do
     t.string "sodienthoai"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "hashed_password"
+    t.string "salt"
+    t.integer "point"
   end
 
   create_table "khuyenmais", force: :cascade do |t|
@@ -158,6 +161,16 @@ ActiveRecord::Schema.define(version: 2021_12_11_013443) do
     t.string "tenStt"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "quatangs", force: :cascade do |t|
+    t.integer "soluongmua"
+    t.integer "soluongtang"
+    t.float "giamgiathem"
+    t.bigint "ctkhuyenmai_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["ctkhuyenmai_id"], name: "index_quatangs_on_ctkhuyenmai_id"
   end
 
   create_table "sanphams", force: :cascade do |t|
@@ -232,6 +245,7 @@ ActiveRecord::Schema.define(version: 2021_12_11_013443) do
   add_foreign_key "dathangs", "khachhangs"
   add_foreign_key "dathangs", "order_statuses"
   add_foreign_key "dathangs", "vanchuyens"
+  add_foreign_key "quatangs", "ctkhuyenmais"
   add_foreign_key "sanphams", "loaisps"
   add_foreign_key "thanhphan_nguyenlieus", "nguyenlieus"
   add_foreign_key "thanhphan_nguyenlieus", "sanphams"

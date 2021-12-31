@@ -1,4 +1,7 @@
 
+
+
+
 <div class="page-section section mb-50">
   <div class="container-fluid">
       <div class="row">
@@ -18,12 +21,14 @@
                     <th>Giá T.Phần thêm</th>
                     <th class="pro-quantity">Số lượng</th>
                     <th class="pro-subtotal">Tổng</th>
+                     <th class="pro-subtotal">Tặng</th>
                     <th class="pro-remove"> </th>
                   </tr>
                 </thead>
                 <tbody>
                   <% @dathang.ct_sp_ches.each do |a| %>
                       <tr>
+                        <%= form_with(model: a) do |form| %>
                           <% @banggium = Banggium.where(:ctspham_id => a.ctspham.id).last%>
                           <td class="pro-thumbnail"><a href="#"><img src="/images/thucuong/<%= a.ctspham.sanpham.anh%>"
                             class="img-fluid" width="50" height="70" alt="<%= a.ctspham.sanpham.tensanpham %>" ></a></td>
@@ -37,9 +42,9 @@
                           </a></td>
                           <td class="pro-title"><a href="#"><%= a.ctspham.size.tensize %></a></td>
                           <td class="pro-price">
-                            <% Banggium.where(:id => @banggium.id).each do |bangium| %>
-                              <span><%= bangium.gia %></span>
-                            <% end %>
+                            <% banggiumm = Banggium.find(@banggium.id)%>
+                              <%togg = a.checksukien(a.ctspham.sanpham_id)%>
+                              <span><%= (banggiumm.gia - banggiumm.gia*togg).to_i %></span>
                             </td>
                             <td class="pro-price"><% @chonthems = Ctchonthem.where(ct_sp_ch_id: a.id)%>
                             <p>
@@ -54,9 +59,13 @@
                             <div class="pro-qty"><input type="number" value="<%= a.soluong%>"></div>
                           </td>
                           <td class="pro-subtotal"><span><%= a.giact %></span></td>
+                          <td class="pro-subtotal"><span><%= a.quatangsl(a.ctspham.sanpham_id, a.soluong) %></span></td>
                           <% if @dathang.order_status.tenStt !='Hoàn thành'%>
-                          <td class="pro-remove"><%= link_to 'Xóa', ct_sp_ch_url(a.id), method: :delete, data: { confirm: 'Are you sure?' } %></td><%end%>
-                          
+                          <td class="pro-remove">
+                            <u>
+                            
+                            <%= link_to 'Xóa', ct_sp_ch_url(a.id), method: :delete, data: { confirm: 'Are you sure?' } %></u></td><%end%>
+                         <%end%> 
                       </tr>
                   <% end %>
                 </tbody>
@@ -76,12 +85,13 @@
               <div class="cart-summary">
                 <div class="cart-summary-wrap">
                   <h4>Thông tin đơn hàng</h4>
-                  <p>Giá:<span><%= @dathang.tonggia%></span></p>
+                  <p>Giá:<span><%= @dathang.tonggiat%></span></p>
                   <p>Phí ship: <span>0</span></p>
                   <h2>Tổng cộng <span ><%= @dathang.tonggia%></span></h2>
                 </div>
                 <input type="hidden" name="order_status_id" value="5">
                 <div class="cart-summary-button">
+
                   <% if @dathang.order_status.tenStt !='Hoàn thành'%>
                   <button type="submit" class="checkout-btn">Mua hàng</button><%end%>
                 </div>

@@ -76,8 +76,17 @@
                     <div class="col-lg-6 col-md-12 col-xs-12">
                         <!-- product quick view description -->
                         <div class="product-feature-details">
-                            <h2 class="product-title mb-15"><%= @sanpham.tensanpham%></h2>
-
+                            <h2 class="product-title mb-15"><%= @sanpham.tensanpham%></h2><br/>
+                            <%if @sanpham.checkquatang != nil%>
+                                <div class="khuyen-mai-hb col-md-6"> 
+                            
+                                    <span class="tieu-de"><i class="bx bx-gift"></i> Khuyến mãi đặc biệt</span> 
+                                   <ul>
+                                    <li>Mua <%= @sanpham.checkquatang.soluongmua%> tặng <%= @sanpham.checkquatang.soluongtang%></li>
+                                   </ul>
+                                </div>
+                            
+                            <%end%>
                             <p class="product-rating">
                                 <i class="fa fa-star active"></i>
                                 <i class="fa fa-star active"></i>
@@ -134,8 +143,8 @@
 
                                         </div>
                                         <div class="col-md-6 col-12 mb-25">
-
-                                            <%= form.hidden_field :ctspham_id, name: "ctspham_id", id: "ctspham_id"%>
+                                            <% ctdz = Ctspham.where(sanpham_id: @sanpham.id).first%>
+                                            <%= form.hidden_field :ctspham_id, name: "ctspham_id", id: "ctspham_id", value: ctdz.id%>
                                         
                                             
                                             

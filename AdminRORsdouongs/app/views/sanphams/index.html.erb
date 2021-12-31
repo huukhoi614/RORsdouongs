@@ -47,7 +47,7 @@
 		      	<% @sanphams.each do |sanpham| %>
 			      	<tr> 
 			       
-				       <td class="hidden-xs"><a href="/sanphams/<%= sanpham.id%>"><%= sanpham.id%></a></td> 
+				       <td class="hidden-xs"><a href="/sanphams/<%= sanpham.id%>"><u><%= sanpham.id%></u></a></td> 
 				       <td><a href="/sanphams/<%= sanpham.id%>"><%= sanpham.tensanpham%></a></td> 
 				       <td><%= @loaisp.find(sanpham.loaisp_id).tenloai %></td> 
 				       <td>
@@ -65,7 +65,7 @@
 				            <%end%>
 						<% end%>
 						<% if (@khuyenmaiy != nil)%>
-					  	<% ctkh = Ctkhuyenmai.where(:loaisp_id => sanpham.loaisp_id, :khuyenmai_id => @khuyenmaiy.id).first%>
+					  	<% ctkh = Ctkhuyenmai.where(:sanpham_id => sanpham.id, :khuyenmai_id => @khuyenmaiy.id).first%>
 					  	<%end%>
 					  	<%if ctkh != nil%>
 					  	<% ctkhuyenmai = Ctkhuyenmai.find(ctkh.id)%>
@@ -73,7 +73,7 @@
 					  	<% if (ctkhuyenmai != nil)%>
 							
 							<% if @bangiumsx != nil%>
-						    	<%= (@bangiumsx.gia - @bangiumsx.gia * ctkhuyenmai.tylegiam).to_i%>đ</span>
+						    	<%= (@bangiumsx.gia - @bangiumsx.gia * (ctkhuyenmai.tylegiam/100)).to_i%>đ</span>
 							<%end%> 
 						
 						<%end%>

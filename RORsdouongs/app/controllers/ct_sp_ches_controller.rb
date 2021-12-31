@@ -58,9 +58,9 @@ class CtSpChesController < ApplicationController
   # PATCH/PUT /line_items/1 or /line_items/1.json
   def update
     respond_to do |format|
-      if @ct_sp_ch.update(ct_sp_ch_params)
-        format.html { redirect_to @ct_sp_ch, notice: "Line item was successfully updated." }
-        format.json { render :show, status: :ok, location: @line_item }
+      soluong = params[:soluong]
+      if @ct_sp_ch.update(soluong: soluong)
+        format.html { redirect_to @ct_sp_ch.dathang, notice: "Line item was successfully updated." }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @ct_sp_ch.errors, status: :unprocessable_entity }

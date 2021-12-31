@@ -63,7 +63,7 @@ class KhachhangsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def khachhang_params
-      params.require(:khachhang).permit(:tenKH, :sodienthoai, :diachi)
+      params.require(:khachhang).permit(:tenKH, :sodienthoai, :diachi, :hashed_password, :salt, :password, :password_confirmation, :point)
     end
  
 end

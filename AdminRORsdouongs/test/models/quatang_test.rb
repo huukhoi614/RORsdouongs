@@ -1,6 +1,6 @@
 require "test_helper"
 
-class ThongkeTest < ActiveSupport::TestCase
+class QuatangTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
