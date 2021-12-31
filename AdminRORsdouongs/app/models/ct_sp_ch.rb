@@ -2,6 +2,7 @@ class CtSpCh < ApplicationRecord
   belongs_to :ctspham
   belongs_to :dathang
   has_many :ctchonthems
+  accepts_nested_attributes_for :ctchonthems
   def giact
     tong = 0
     if(ctspham.present?)  
