@@ -30,6 +30,7 @@ class User < ApplicationRecord
             end
         end
     end
+    
     def User.authenticate2(phone, password) 
         if user = find_by_phone(phone)
             if user.hashed_password == encrypt_password(password, user.salt)

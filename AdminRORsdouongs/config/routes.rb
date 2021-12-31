@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       resources :ct_sp_ches
       resources :users
       resources :khuyenmais
+      resources :auths
     end
   end
   resources :quatangs
@@ -42,31 +43,6 @@ Rails.application.routes.draw do
   
     get 'home' => 'home#trangchu'
   
-<<<<<<< HEAD
-    controller :sessions do
-        get 'login' => :new
-        post 'login' => :create
-        delete 'logout' => :destroy
-=======
-  namespace :api do
-    namespace :v1 do
-      resources :loaisps
-      resources :sanphams
-      resources :ctsphams
-      resources :cuahangs
-      resources :sizes
-      resources :chonthems
-      resources :bangiums
-      resources :khachhangs
-      resources :ctchonthems
-      resources :dathangs
-      resources :ct_sp_ches
-      resources :users
-      resources :khuyenmais
-      resources :auths
->>>>>>> d32755be04ed528ce424d43a78b861662578c9e0
-    end
-
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
