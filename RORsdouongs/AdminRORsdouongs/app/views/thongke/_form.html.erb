@@ -1,0 +1,85 @@
+
+<div class="main-content">
+    <div class="box">
+        <div class="box-body overflow-scroll">
+            <table > 
+            <thead> 
+             <tr> 
+              <th class="hidden-xs">Mã số</th> 
+              <th>Khách hàng</th>
+              <th>Ngày hoàn thành</th> 
+              <th>Sản Phẩm</th>
+              
+	          <th>Topping</th>
+	          <th>Size</th>
+	          <th>Đơn Giá</th>
+	          <th>Giá topping</th>
+	          <th>Số lượng</th>
+              <th>giá</th> 
+              
+             
+             </tr> 
+            </thead> 
+            <tbody>
+            	<%tong = 0%>
+                <% @dathangs.each do |dathang| %>
+               
+              <tr>
+                <td><a href="/dathangs/<%= dathang.id%>"><%= dathang.id %></a></td>
+                <td><%= dathang.khachhang.tenKH %></td>   
+                <td><%= dathang.ngaynhan %></td>
+            	<td></td>
+               	<td></td>
+               	<td></td>
+               		<td></td>
+               	<td></td>
+               	<td></td>
+                <td><%= dathang.tonggiat %></td>
+                
+                  <%tong = tong + dathang.tonggiat%>
+             
+                
+                
+              </tr>
+             
+              	<% dathang.ct_sp_ches.each do |a| %>
+                       <tr>
+                       	<td></td>
+                       	<td></td>
+                       	<td></td>
+                          <% @banggium = Banggium.where(:ctspham_id => a.ctspham.id).last%>
+                          <td class="pro-title"><a href="#"><%= a.ctspham.sanpham.tensanpham %></a></td>
+                          <td class="pro-title"><a href="#">
+                            <% @chonthems = Ctchonthem.where(ct_sp_ch_id: a.id)%>
+                            <p>
+                            <% @chonthems.each do |ct|%>
+                              <%= ct.chonthem.tenthanhphan%>,
+                            <%end%></p>
+                          </a></td>
+                          <td class="pro-title"><a href="#"><%= a.ctspham.size.tensize %></a></td>
+                          <td class="pro-price">
+                            <% Banggium.where(:id => @banggium.id).each do |bangium| %>
+                              <span><%= bangium.gia %></span>
+                            <% end %>
+                            </td>
+                            <td class="pro-price"><% @chonthems = Ctchonthem.where(ct_sp_ch_id: a.id)%>
+                            <p>
+                              <%tongct=0%>
+                            <% @chonthems.each do |ct|%>
+                              <%tongct = tongct+ ct.chonthem.gia.to_i%>
+                            <%end%>
+                              <%= tongct%>
+                            </p></td>
+                          <td class="pro-quantity">
+
+                            <%= a.soluong%>
+                          <td></td>
+                     </tr>
+                  <% end %>
+              
+          <% end %>
+           </tbody></table> 
+           <h3>Tổng: <%= tong%>đ</h3>
+        </div>
+    </div>
+</div> 

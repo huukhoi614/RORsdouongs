@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tensanpham: MyString
+  loaisp: one
+  mota: MyText
+  anh: MyText
+
+two:
+  tensanpham: MyString
+  loaisp: two
+  mota: MyText
+  anh: MyText

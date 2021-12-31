@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  gia: 1
+  ngaycapnhat: 2021-10-19
+  ctspham: one
+
+two:
+  gia: 1
+  ngaycapnhat: 2021-10-19
+  ctspham: two

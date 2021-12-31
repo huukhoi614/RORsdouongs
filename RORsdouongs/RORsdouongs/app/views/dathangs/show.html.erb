@@ -1,0 +1,183 @@
+
+<div class="breadcrumb-area mb-50">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="breadcrumb-container">
+            <ul>
+              <li><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
+              <li class="active"><a>Đặt hàng</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--=====  End of breadcrumb area  ======-->
+
+
+  <!--=============================================
+    =            Cart page content         =
+    =============================================-->
+
+
+<div class="page-section section mb-50">
+  <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <form action="#">
+            <!--=======  cart table  =======-->
+
+            <div class="cart-table table-responsive mb-40">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th class="pro-thumbnail">Ảnh</th>
+                    <th class="pro-title">Đồ uống</th>
+                    <th class="pro-title">Thành phần thêm</th>
+                    <th class="pro-size">Size</th>
+                    <th class="pro-price">Giá</th>
+                    <th >Giá T phần thêm</th>
+                    <th class="pro-quantity">Số lượng</th>
+                    <th class="pro-subtotal">Tổng</th>
+                     <th class="pro-subtotal">Tặng</th>
+                    <th class="pro-remove"> </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @dathang.ct_sp_ches.each do |a| %>
+                      <tr>
+
+                        <%= form_with(model: @dathang, :url => dathang_path) do |form| %>
+                          <input type="hidden" name="ct_sp_ch" value="<%= a.id%>">
+                          <% @banggium = Banggium.where(:ctspham_id => a.ctspham.id).last%>
+                          <td class="pro-thumbnail"><a href="#"><img src="/images/thucuong/<%= a.ctspham.sanpham.anh%>"
+                            class="img-fluid" width="50" height="70" alt="<%= a.ctspham.sanpham.tensanpham %>" ></a></td>
+                          <td class="pro-title"><a href="#"><%= a.ctspham.sanpham.tensanpham %></a></td>
+                          <td class="pro-title"><a href="#">
+                            <% @chonthems = Ctchonthem.where(ct_sp_ch_id: a.id)%>
+                            <p>
+                            <% @chonthems.each do |ct|%>
+                              <%= ct.chonthem.tenthanhphan%>,
+                            <%end%></p>
+                          </a></td>
+                          <td class="pro-title"><a href="#"><%= a.ctspham.size.tensize %></a></td>
+                          <td class="pro-price">
+                            <% banggiumm = Banggium.find(@banggium.id)%>
+                              <%togg = a.checksukien(a.ctspham.sanpham_id)%>
+                              <span><%= (banggiumm.gia - banggiumm.gia*togg).to_i %></span>
+                            
+                            </td>
+                            <td> <p>
+                              <%tongct=0%>
+                            <% @chonthems.each do |ct|%>
+                              <%tongct = tongct+ ct.chonthem.gia.to_i%>
+                            <%end%>
+                              <%= tongct%>
+                            </p></td>
+                          <td class="pro-quantity">
+                            <div class="pro-qty"><input type="number" name="soluong" value="<%=a.soluong%>"> </div>
+                          </td>
+                          <td class="pro-subtotal"><span><%= a.giact %></span></td>
+                          <td class="pro-subtotal"><span><%= a.quatangsl(a.ctspham.sanpham_id, a.soluong) %></span></td>
+                          <% if @dathang.order_status.tenStt =='Đang tiến hành'%>
+                           <td align="center">
+                            <button type="submit" class="btn"><u>Cập nhật</u> |</button>
+                            <%= link_to 'Xóa', ct_sp_ch_url(a.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+                          </td> <%end%>
+                          <% end -%>
+                      </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+
+            <!--=======  End of cart table  =======-->
+
+
+          </form>
+
+          <div class="row">
+
+            <div class="col-lg-6 col-12 ">
+              <!--=======  Calculate Shipping  =======-->
+
+              <div class="calculate-shipping">
+                <h4>Chọn điểm đến khác</h4>
+                <%= form_with(model: @dathang, :url => dathang_path) do |form| %>
+                  <div class="row">
+                    
+                    <div class="col-md-6 col-12 mb-25">
+                      <input type="text" name="diachinhan" placeholder="Địa chỉ nhận">
+                    </div>
+                    <div class="col-md-6 col-12 mb-25">
+                      
+                    </div>
+                    <div class="col-md-6 col-12 mb-25">
+                      <h4>Chọn Chi Nhánh Mua hàng</h4>
+                    </div>
+                    <div class="col-md-6 col-12 mb-25">
+                      
+                    </div>
+                    <div class="col-md-6 col-12 mb-25">
+                      <select class="nice-select">
+                         <option value="0" hidden="true">Vui lòng chọn nơi mua</option>
+                        <% @cuahang.each do |cuahang| %>
+                          <option value="<%= cuahang.id %>" ><%= cuahang.tencuahang %>
+                                </option>
+                      <% end %> </select>
+                    </div>
+                    <div class="col-md-6 col-12 mb-25">
+                      <input type="hidden" name="cuahang_id" id="cuahangid">
+                      <% if @dathang.order_status.tenStt !='Hoàn thành'%>
+                      <input type="submit" value="Thay đổi"><%end%>
+                    </div>
+                  </div>
+                <%end%>
+              </div>
+            </div>
+
+
+            <div class="col-lg-6 col-12 d-flex">
+              <!--=======  Cart summery  =======-->
+              <%= form_with(model: @dathang, :url => dathang_path) do |form| %>
+              <div class="cart-summary">
+                <div class="cart-summary-wrap">
+                  <h4>Thông tin đơn hàng</h4>
+                  <h7>Địa chỉ nhận:</h7>
+                  <p><%= @dathang.diachinhan%></p>
+                  <input type="hidden" name="order_status_id" value="2">
+                  <h7>Địa chỉ mua hàng:</h7>
+                  <p><%= @dathang.cuahang.diachi%></p>  
+                  <p>Giá:<span><%= @dathang.tonggia%></span></p>
+                  <p>Phí ship: <span>0</span></p>
+                  <h2>Tổng cộng <span ><%= @dathang.tonggia%></span></h2>
+                </div>
+                <div class="cart-summary-button">
+                   <% if @dathang.order_status.tenStt =='Đang tiến hành'%>
+                  <button type="submit" class="checkout-btn">Mua hàng</button><%end%>
+                </div>
+              </div>
+              <%end%>
+
+              <!--=======  End of Cart summery  =======-->
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+<script type="text/javascript">
+    $(function savesize(){
+        $('.nice-select').trigger('change'); //This event will fire the change event. 
+        $('.nice-select').change(function(){
+          var data= $(this).val();
+          
+          document.getElementById("cuahangid").value=data;
+        });
+    });
+</script>

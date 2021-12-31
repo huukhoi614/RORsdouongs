@@ -1,0 +1,105 @@
+<div class="main-header">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col col-md-3 text-left "> 
+      	<h2>Danh mục đồ uống</h2>
+      </div>
+      
+       <div class="col col-md-4 text-right"> 
+       	<%= form_tag(sanphams_path, method: :get) do %>
+      		Tên sản phẩm: 
+			  <%= text_field_tag :term, params[:term] %>
+
+			  <%= submit_tag 'Search' %>
+			<% end %>
+	  	<!--<div id="dp_menu" class="dp_menu">
+			<button></button>
+			<ul class="main-menu" style="display:none">
+				
+			</ul>-->
+       
+      </div> 
+      <div class="col col-md-3 text-left "> 
+      	
+      </div>
+      <div class="col col-md-2 text-right"> 
+       <a href="sanphams/new" type="button" class="btn btn-sm btn-primary btn-create">Thêm mới</a> 
+      </div> 
+		</div>
+	</div>
+            
+          
+</div>
+<div class="main-content">
+    <div class="box">
+    	<div class="panel-body"> 
+	    	<table class="table table-striped table-bordered table-list"> 
+		      <thead> 
+		       <tr> 
+		        <th class="hidden-xs">Mã số</th> 
+		        <th>Tên đồ uống</th> 
+		        <th>Loại</th> 
+		        <th>Giá</th> 
+		        <th><em class="fa fa-cog"></em></th>
+		       </tr> 
+		      </thead> 
+		      <tbody>
+		      	<% @sanphams.each do |sanpham| %>
+			      	<tr> 
+			       
+				       <td class="hidden-xs"><a href="/sanphams/<%= sanpham.id%>"><u><%= sanpham.id%></u></a></td> 
+				       <td><a href="/sanphams/<%= sanpham.id%>"><%= sanpham.tensanpham%></a></td> 
+				       <td><%= @loaisp.find(sanpham.loaisp_id).tenloai %></td> 
+				       <td>
+				       	<% ctsanphamss1	= Ctspham.where(sanpham_id: sanpham.id, size_id: 1).last %>
+						<% if ctsanphamss1 != nil%>
+							<% @bangiumsx = Banggium.where(ctspham_id: ctsanphamss1.id).last %>
+						<%end%>
+					  	<% loaisp = sanpham.loaisp.tenloai%>
+					  	<% @khuyenmai = Khuyenmai.all%>
+						<% @khuyenmai.each do |km|%>
+							<% if km.ngayBD <= Time.now%>
+				                <%if km.ngayKT >= Time.now%>
+				                    <% @khuyenmaiy = Khuyenmai.find(km.id)%>
+				                <%end%>
+				            <%end%>
+						<% end%>
+						<% if (@khuyenmaiy != nil)%>
+					  	<% ctkh = Ctkhuyenmai.where(:sanpham_id => sanpham.id, :khuyenmai_id => @khuyenmaiy.id).first%>
+					  	<%end%>
+					  	<%if ctkh != nil%>
+					  	<% ctkhuyenmai = Ctkhuyenmai.find(ctkh.id)%>
+					  	
+					  	<% if (ctkhuyenmai != nil)%>
+							
+							<% if @bangiumsx != nil%>
+						    	<%= (@bangiumsx.gia - @bangiumsx.gia * (ctkhuyenmai.tylegiam/100)).to_i%>đ</span>
+							<%end%> 
+						
+						<%end%>
+						<%else%>
+								<% if @bangiumsx != nil%>
+							    	<%= @bangiumsx.gia%>
+								<%end%> đ</span>
+						<% end%>
+					</td>
+				       <td align="center"><a class="btn btn-default"><em class="fa fa-pencil"></em></a> <a class="btn btn-danger"><em class="fa fa-trash"></em></a>
+				       </td> 
+			      </tr> 
+					
+					
+				<% end %>
+		      	
+		      
+		     </tbody>
+		 </table><%= paginate @sanphams%>
+	        
+	    </div>
+    </div>
+</div>
+
+
+
+
+
+

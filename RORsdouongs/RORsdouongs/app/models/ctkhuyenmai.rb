@@ -1,0 +1,2 @@
+class Ctkhuyenmai < ApplicationRecord
+end

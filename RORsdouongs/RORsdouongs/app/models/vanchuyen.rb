@@ -1,0 +1,2 @@
+class Vanchuyen < ApplicationRecord
+end
