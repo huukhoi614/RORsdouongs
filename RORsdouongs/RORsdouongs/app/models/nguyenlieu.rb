@@ -1,2 +1,0 @@
-class Nguyenlieu < ApplicationRecord
-end

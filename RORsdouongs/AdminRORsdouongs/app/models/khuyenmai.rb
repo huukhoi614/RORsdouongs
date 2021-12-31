@@ -1,2 +1,0 @@
-class Khuyenmai < ApplicationRecord
-end

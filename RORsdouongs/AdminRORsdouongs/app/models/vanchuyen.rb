@@ -1,2 +1,0 @@
-class Vanchuyen < ApplicationRecord
-end
