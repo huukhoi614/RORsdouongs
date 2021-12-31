@@ -1,3 +1,4 @@
+require 'digest/sha2'
 class Khachhang < ApplicationRecord
 	validates :sodienthoai, :presence => true, :uniqueness => true
 	

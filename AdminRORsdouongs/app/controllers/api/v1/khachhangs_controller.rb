@@ -20,7 +20,11 @@ module Api::V1
     end
 
     def create 
-        khachhang = Khachhang.new(khachhang_params)
+        khachhang = Khachhang.create({
+            sodienthoai:params[:sodienthoai],
+            password:params[:password],
+            password_confirmation:params[:password_confirmation]   
+        })
         if khachhang.save
             render json: "Success"
         else
@@ -31,17 +35,6 @@ module Api::V1
     def update
         
     end
+end
 
-    private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_khachhang
-      @khachhang = Khachhang.find(params[:id])
-    end
-
-    # Only allow a list of trusted parameters through.
-    def khachhang_params
-      params.require(:khachhang).permit(:tenKH, :sodienthoai, :diachi, :hashed_password, :salt, :password, :password_confirmation, :point)
-    end
-
-	end
 end
