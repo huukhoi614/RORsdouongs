@@ -6,10 +6,28 @@ module Api::V1
         render json: @khuyenmais
 	  end
       
-      def show
-        @khuyenmai = Khuyenmai.select(:id,:tendot,:ngayBD,:ngayKT).find(params[:id])
-        render json: @khuyenmai
+    def show
+      @khuyenmai = Khuyenmai.select(:id,:tendot,:ngayBD,:ngayKT).find(params[:id])
+      render json: @khuyenmai
+    end
+
+    def create
+      khuyenmai = Khuyenmai.new(khuyenmai_params)
+      if khuyenmai.save
+        render json: "Success"
+      else
+        render json: "Error"
       end
+    end
+
+
+
+    private
+    def khuyenmai_params
+      params.require(:khuyenmai).permit(:tendot,:ngayBD,:ngayKT)
+    end
+
+
 
 	end
 end

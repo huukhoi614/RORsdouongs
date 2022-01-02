@@ -1,22 +1,18 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :loaisps
+      resources :khuyenmais
       resources :sanphams
       resources :ctsphams
-      resources :cuahangs
-      resources :sizes
       resources :chonthems
-      resources :bangiums
-      resources :khachhangs
-      resources :ctchonthems
       resources :dathangs
-      resources :ct_sp_ches
-      resources :users
-      resources :khuyenmais
+      resources :cuahangs
+      resources :khachhangs
       resources :auths
+      resources :ctkhuyenmais
     end
   end
+
   resources :quatangs
   resources :khuyenmais
   

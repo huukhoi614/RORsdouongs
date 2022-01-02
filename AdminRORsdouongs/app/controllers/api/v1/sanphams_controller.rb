@@ -4,18 +4,21 @@ module Api::V1
 	  def index
 		  @records = Sanpham
 			.joins("
-					join ctsphams ON ctsphams.sanpham_id = sanphams.id 
-					join banggia on banggia.ctspham_id = ctsphams.id
-					join ctkhuyenmais on ctkhuyenmais.sanpham_id = sanphams.id
+					left join ctsphams ON ctsphams.sanpham_id = sanphams.id 
+					left join banggia on banggia.ctspham_id = ctsphams.id
+					left join ctkhuyenmais on ctkhuyenmais.sanpham_id = sanphams.id
 					where ctsphams.size_id = 1
 				")
-			.select("sanphams.id,sanphams.tensanpham,sanphams.anh,banggia.gia,ctkhuyenmais.tylegiam")
+			.select("sanphams.id,sanphams.tensanpham,sanphams.anh,banggia.gia,COALESCE(ctkhuyenmais.tylegiam,0) as discount")
 		render json: @records 
 	  end
 
 	  def show
-		@sanpham = Sanpham.joins("join ctkhuyenmais on ctkhuyenmais.sanpham_id = sanphams.id").select(:id, :tensanpham, :anh,:tylegiam).find(params[:id])
-		render json: @sanpham
+		@sanpham = Sanpham
+			.joins("left join ctkhuyenmais on ctkhuyenmais.sanpham_id = sanphams.id")
+			.select("sanphams.id,sanphams.tensanpham,sanphams.anh,COALESCE(ctkhuyenmais.tylegiam,0) as discount")
+			.find(params[:id])
+			render json: @sanpham
 	  end
 
 	end

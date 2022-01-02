@@ -22,6 +22,7 @@ module Api::V1
     def create 
         khachhang = Khachhang.create({
             sodienthoai:params[:sodienthoai],
+            tenKH:params[:tenKH],
             password:params[:password],
             password_confirmation:params[:password_confirmation]   
         })
