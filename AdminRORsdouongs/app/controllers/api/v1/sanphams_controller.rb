@@ -4,10 +4,12 @@ module Api::V1
 	  def index
 		  @records = Sanpham
 			.joins("
-				left join ctsphams ON ctsphams.sanpham_id = sanphams.id and ctsphams.size_id = 1
-				left join banggia on banggia.ctspham_id = ctsphams.id
-				left join ctkhuyenmais on ctkhuyenmais.sanpham_id = sanphams.id
-				left join khuyenmais on khuyenmais.id = ctkhuyenmais.khuyenmai_id and #{DateTime.current.to_date} BETWEEN khuyenmais.ngayBD and khuyenmais.ngayKT")
+				INNER JOIN ctsphams ON ctsphams.sanpham_id = sanphams.id AND ctsphams.size_id = 1
+				LEFT JOIN banggia ON banggia.ctspham_id = ctsphams.id
+				LEFT JOIN ctkhuyenmais ON ctkhuyenmais.sanpham_id = sanphams.id AND ctkhuyenmais.khuyenmai_id IN (
+				SELECT id FROM khuyenmais  WHERE khuyenmais.ngayBD <= NOW() AND khuyenmais.ngayKT >= NOW()
+				)
+			")
 			.select("sanphams.id,sanphams.tensanpham,sanphams.anh,banggia.gia,COALESCE(ctkhuyenmais.tylegiam,0) as discount")
 		render json: @records
 	  end
@@ -15,8 +17,10 @@ module Api::V1
 	  def show
 		@sanpham = Sanpham
 			.joins("
-				left join ctkhuyenmais on ctkhuyenmais.sanpham_id = sanphams.id
-				left join khuyenmais on khuyenmais.id = ctkhuyenmais.khuyenmai_id and #{DateTime.current.to_date} BETWEEN khuyenmais.ngayBD and khuyenmais.ngayKT")
+				left join ctkhuyenmais on ctkhuyenmais.sanpham_id = sanphams.id AND ctkhuyenmais.khuyenmai_id IN (
+					SELECT id FROM khuyenmais  WHERE NOW() BETWEEN khuyenmais.ngayBD AND khuyenmais.ngayKT
+				)"
+			)
 			.select("sanphams.id,sanphams.tensanpham,sanphams.anh,COALESCE(ctkhuyenmais.tylegiam,0) as discount")
 			.find(params[:id])
 			render json: @sanpham
