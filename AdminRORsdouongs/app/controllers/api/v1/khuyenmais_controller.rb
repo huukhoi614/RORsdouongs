@@ -3,6 +3,7 @@ module Api::V1
   
 	  def index
 	  	@khuyenmais = Khuyenmai.select(:id,:tendot,:ngayBD,:ngayKT)
+      .where('now() BETWEEN khuyenmais.ngayBD AND khuyenmais.ngayKT')
         render json: @khuyenmais
 	  end
       
